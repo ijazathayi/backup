@@ -1,0 +1,292 @@
+
+/* -------------------------------Contact.css------------------------------------  */
+#under1, #under2{
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background-color: black;
+  left: 23px;
+  top:50px;
+}
+#contact-section {
+  height: 100vh;
+  min-width: 350px;
+}
+
+.contact {
+  width: 100%;
+  height: 100vh;
+  background-color: #717f92;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 320px;
+
+}
+
+.contact-div {
+  width: 60%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1efd6;
+  padding-left: 6%;
+  padding-right: 6%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 1;
+  border-radius: 15px;
+  position: relative;
+  min-height: 760px;
+
+
+}
+
+.contact-div h1 {
+  font-family: "Milonga", serif;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.contact-div p {
+  font-family: "Andika", sans-serif;
+  font-size: 13px;
+  color: #5e4e39;
+  margin-bottom: 15px;
+}
+
+.contact-div form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* .contact-div form input, .contact-div form textarea{
+  margin-top: 10px;  } */
+.contact-form form input {
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.contact-form form textarea {
+  margin-top: 10px;
+  padding: 5px;
+  height: 85px;
+  border: 1px solid black;
+  max-width: 340px;
+  max-height: 80px;
+  min-width: 150px;
+  scrollbar-width: none;
+}
+
+.contact-form button {
+  width: 150px;
+  height: 40px;
+  margin-top: 15px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-container {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  /* border: 1px solid black; */
+  border-radius: 15px;
+  /* background-color: black; */
+
+}
+
+.contact-form {
+  height: 97%;
+  padding: 20px;
+  width: 61%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  /* margin-right: 20px; */
+  border-radius: 15px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #f1efd6;
+  position: relative;
+  
+}
+
+.contact-form h2 {
+  display: flex;
+}
+
+#get-touch {
+  height: 97%;
+  padding: 20px;
+  width: 36%;
+  border: 1px solid black;
+  /* margin-left: 10px; */
+  border-radius: 15px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #f1efd6;
+  position: relative;
+
+}
+
+#get-touch h2 {
+  /* font-family: "Milonga", serif; */
+  font-size: 22px;
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.touch-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.touch-item h3 {
+  font-family: "Andika", sans-serif;
+  font-size: 16px;
+  color: #5e4e39;
+}
+
+.touch-item-child {
+  position: relative;
+  width: 100%;
+}
+
+.touch-item-child h4 {
+  font-family: "Andika", sans-serif;
+  font-size: 16px;
+  color: #5e4e39;
+  margin-left: 0;
+  display: flex;
+}
+
+.touch-item-child span {
+
+  margin-left: 0;
+  display: flex;
+}
+#touch-contact {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: 4%;
+}
+
+#touch-contact div{
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+#touch-contact div img:hover{
+  transform: scale(1.25);
+  transition: all 0.3s ease-in-out;
+}
+
+@media (min-width: 320px) {
+
+  .contact {
+  width: 100%;
+  height: 130%;
+  background-color: #717f92;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.contact-div {
+  width: 90%;
+  height: 90%;
+}
+
+
+.contact-container {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  justify-content: none;
+
+}
+.contact-form {
+  width: 90%;
+  height: 50%;
+  border-radius: 15px;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid black;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+#get-touch {
+  width: 90%;
+  height: 35%;
+  border-radius: 15px;
+  border-radius: 0;
+  border: 0;
+}
+
+}
+@media (min-width: 768px) {
+
+  .contact {
+  width: 100%;
+  height: 100vh;
+  background-color: #717f92;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.contact-div {
+  width: 70%;
+  height: 80%;
+}
+.contact-container {
+  width: 100%;
+  height: 60%;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}
+.contact-form {
+  width: 61%;
+  height: 97%;
+  border-radius: 15px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 20px;
+  border-bottom: 0;
+  border-right: 1px solid black;
+}
+#get-touch {
+  width: 36%;
+  height: 97%;
+  border-radius: 15px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 20px;
+}
+
+}

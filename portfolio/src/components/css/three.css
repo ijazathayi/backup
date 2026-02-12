@@ -1,0 +1,156 @@
+
+/*/ //////////////////////////// this is for three /////////////////////////////////////*/
+.three {
+  background-color: #f1efd6;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  position: relative;
+  padding-top: 13%;
+  padding-bottom: 13%;
+}
+
+#three-head {
+  font-family: "Milonga", serif;
+  font-size: 40px;
+  margin-bottom: 30px;
+
+}
+
+.three-carousel {
+  width: 48%;
+  overflow-x: auto;
+  margin: 3em auto;
+  display: flex;
+  gap: 1em;
+  scroll-behavior: smooth;
+  position: relative;
+  background: linear-gradient(to right, #f1efd6, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 80%, );
+
+}
+
+.three-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.three-carousel::scroll-button(right) {
+  content: ">";
+  border: none;
+  font-family: Consolas;
+  color: black;
+  border-radius: 50%;
+  padding-bottom: 0.1em;
+  cursor: pointer;
+  position: absolute;
+  right: 20%;
+  top: 50%;
+  background-color: transparent;
+  font-size: 50px;
+}
+
+.three-carousel::scroll-button(left) {
+  content: "<";
+  border-radius: 100% 0% 100% 0% / 0% 100% 0% 100%;
+  border: none;
+  font-family: Consolas;
+  color: black;
+  border-radius: 50%;
+  padding-bottom: 0.1em;
+  cursor: pointer;
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  background-color: transparent;
+  font-size: 50px;
+
+}
+
+/* .three-carousel::scroll-button(inline-end), 
+.three-carousel::scroll-button(inline-start){
+
+} */
+.three-carousel::scroll-button(right):disabled,
+.three-carousel::scroll-button(left):disabled {
+  opacity: 0.5;
+  cursor: auto;
+  /* display: none; */
+}
+
+.three-card {
+  flex: 0 0 20em;
+  height: 20em;
+  background-color: var(--primary-color);
+  padding: 1em;
+  border-radius: 0.5em;
+  text-align: center;
+  align-content: center;
+  border: 1px solid black;
+}
+
+.three-card span {
+  font-family: "Andika", sans-serif;
+  font-size: 25px;
+  color: black;
+  opacity: 0.5;
+  cursor: default;
+}
+
+
+@media (max-width: 767px) {
+
+.three {
+  background-color: #f1efd6;
+  height: 130vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  position: relative;
+}
+
+
+
+
+.three-carousel::scroll-button(right) {
+  right: 8%;
+  display: none;
+
+}
+
+.three-carousel::scroll-button(left) {
+  left: 8%;
+  display: none;
+
+}
+
+.three-carousel {
+  width: 70%;
+
+}
+
+.three-card {
+  flex: 0 0 15em;
+  height: 20em;
+  padding: 0.5em;
+
+}
+
+
+}
+  
+@media (max-width: 1024px) {
+  .carousel-wrapper {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-wrapper {
+    width: 90%;
+  }
+
+}

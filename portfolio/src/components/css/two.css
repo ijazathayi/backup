@@ -1,0 +1,288 @@
+
+/*////////////////////////////// this is for two ///////////////////////////////////*/
+.two {
+  background-color: #e2cab4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  position: relative;
+  padding-top: 15%;
+  padding-bottom: 15%;
+}
+
+#two-back {
+  z-index: 0;
+  width: 35%;
+  height: 80%;
+  position: absolute;
+  border: 15px solid #f1f0da;
+  right: 53%;
+  background: linear-gradient(#94abc6, #d6b09c);
+  /* display: none; */
+}
+
+#two-center {
+  width: 50%;
+  height: 50%;
+  background-color: #f1f3dd;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+   opacity: 0;
+  transform: translateX(60px);
+}
+.fade-in-right {
+  animation: fadeInRight 0.9s ease-out forwards;
+}
+  
+
+#two-center-child1 {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 39px;
+  padding-bottom: 30px;
+  font-family: "Milonga", serif;
+}
+
+#two-center-child2 {
+  width: 100%;
+  height: 70%;
+  position: relative;
+  display: flex;
+  color: #ab9b89;
+  padding-top: 20px;
+
+
+}
+
+.child2-child {
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  scrollbar-color: transparent;
+
+}
+
+#child2-1 {
+  width: 60%;
+  padding: 15px;
+  text-align: left;
+  /* font-family: "Jura", sans-serif; */
+  font-family: "Andika", sans-serif;
+  font-size: 17px;
+}
+
+#child2-2 {
+  width: 40%;
+  border-left: 2px solid black;
+  height: 80%;
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+
+}
+
+#child2-2 button {
+  background-color: transparent;
+  border: 1px solid #ab9b89;
+  color: #ab9b89;
+  font-size: 20px;
+
+  /* position: absolute;
+  top: 15%;
+  right: 15%; */
+}
+
+
+.extra-curved-line-design {
+  position: absolute;
+  right: 5%;
+  top: 60%;
+  z-index: 1;
+  opacity: 0.7;
+  width: 80px;
+}
+
+
+/* ---------------------------------- mobile resposnsive css--------------------------------------------------------------- */
+@media (min-width: 320px) {
+  #two-center {
+  height: 60%;
+  background-color: #f1f3dd;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  
+}
+}
+@media (max-width: 1024px) {
+  #two-back {
+   width: 45%;
+  }
+  #child2-2 {
+   width: 90%;
+   border: 0;
+  }
+  #two-center{
+    width: 60%;
+  }
+#two-center-child2 {
+  width: 100%;
+  height: 90%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ab9b89;
+  padding-top: 5px;
+  border: 0;}
+
+  #child2-1 {
+    height: 150%;
+    width: 90%;
+}
+
+}
+
+
+@media (max-width: 767px) {
+  .two {
+   height: 120vh;
+  background-color: #e2cab4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 0;
+  padding-bottom: 0;
+
+
+  }
+  #two-back {
+   width: 100%;
+  z-index: 0;
+  height: 80%;
+  position: absolute;
+  border: 10px solid #f1f0da;
+  right: 0%;
+  background: linear-gradient(#94abc6, #d6b09c);
+  display: none;
+  }
+  #two-center {
+  width: 90%;
+  height: 50%;
+  background-color: #f1f3dd;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  padding-top: 3%;
+  
+}
+#two-center-child1 {
+  width: 100%;
+  height: 25%;
+  padding-bottom: 10px;
+  padding-top:10px;
+  font-family: "Milonga", serif;
+}
+
+#two-center-child2 {
+  width: 100%;
+  height: 90%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ab9b89;
+  padding-top: 5px;
+}
+#child2-1 {
+  width: 100%;
+  height:200%;
+  padding: 15px;
+  text-align: left;
+  /* font-family: "Jura", sans-serif; */
+  font-family: "Andika", sans-serif;
+  font-size: 17px;
+    overflow:hidden;
+
+}
+
+#child2-2 {
+  width: 40%;
+  border-left: none;
+  height: 80%;
+  width: 80%;
+  margin-top: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+
+}
+
+
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+
+
+@media (max-width: 767px) {
+  #two-back {
+   width: 95%;
+  }
+}
+  
+
+
+*/

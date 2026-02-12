@@ -1,0 +1,58 @@
+
+.keyboard2 {
+  display: inline-block;
+  padding: 10px;
+  background: #f2f2f2;
+  border-radius: 10px;
+  font-family: sans-serif;
+}
+
+.row2 {
+  display: flex;
+  justify-content: flex-start;
+  margin: 5px 0;
+  flex-wrap: wrap;
+}
+
+#btn {
+  margin: 2px;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  min-width: 40px;
+  text-align: center;
+}
+
+#btn:hover {
+  background: #ddd;
+}
+
+.wide {
+  min-width: 80px;
+}
+
+.medium {
+  min-width: 60px;
+}
+
+.space {
+  min-width: 200px;
+}
+
+
+.arrow-keys {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.arrow-top {
+  display: flex;
+  justify-content: center;
+}
+.arrow-keys > div {
+  display: flex;
+  justify-content: space-between;
+}

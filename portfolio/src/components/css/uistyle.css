@@ -1,0 +1,90 @@
+button {
+  border: none;
+  display: block;
+  position: relative;
+  padding: 0.7em 2.4em;
+  font-size: 18px;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  color: black;
+  z-index: 1;
+  font-family: inherit;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+button span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: -1;
+  border: 4px solid black;
+}
+
+button span::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 8%;
+  height: 500%;
+  background: var(--lightgray);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-60deg);
+  transition: all 0.3s;
+}
+
+button:hover span::before {
+  transform: translate(-50%, -50%) rotate(-90deg);
+  width: 100%;
+  background: black;
+}
+
+button:hover {
+  color: white;
+}
+
+button:active span::before {
+  background: grey;
+}
+
+
+/* -----------------------------------stap border css--------------------------------------- */
+
+.stamp-border {
+  /* Change this value to adjust the stamp perforation size: */
+  --radius: 8px;
+
+  background-image: 
+    radial-gradient(
+      var(--radius),
+      transparent 98%,
+      white
+    ),
+    linear-gradient(white 0 0);
+  background-repeat: 
+    round, 
+    no-repeat;
+  background-position:
+    calc(var(--radius) * -1.5) calc(var(--radius) * -1.5),
+    50%;
+  background-size:
+    calc(var(--radius) * 3) calc(var(--radius) * 3),
+    calc(100% - var(--radius) * 3) calc(100% - var(--radius) * 3);
+}
+
+
+/*  Cosmetic styles */
+/* 
+.stamp-border {
+  width: min(50%, 600px);
+  height: 50%;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+} */

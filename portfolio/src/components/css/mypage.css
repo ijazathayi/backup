@@ -1,0 +1,112 @@
+
+
+
+/* ----------------------------------mypage.css------------------------------------ */
+
+.mypage {
+  width: 100%;
+  height: 200vh;
+  background-color: #717f92;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding-bottom: 25%;
+  min-height: 200vh;
+}
+#mypage-section {
+  max-height: 100vh;
+}
+
+.about-div {
+  width: 550px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1efd6;
+  padding-left: 6%;
+  padding-right: 6%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  margin-top: 20%;
+  z-index: 1;
+  border-radius: 15px;
+
+
+}
+
+.about-div h1 {
+  font-family: "Milonga", serif;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.about-div p {
+  font-family: "Andika", sans-serif;
+  font-size: 13px;
+  color: #5e4e39;
+  margin-top: 15px;
+}
+
+#about-sample-1 {
+  width: 450px;
+  height: 500px;
+  position: absolute;
+  /* background-color: linear-gradient(#94abc6, #d6b09c); */
+  background: linear-gradient(#94abc6, #d6b09c);
+  top: 6%;
+  left: 7%;
+  z-index: 0;
+  border-radius: 15px;
+}
+
+#about-sample-2 {
+  width: 450px;
+  height: 500px;
+  position: absolute;
+  background: linear-gradient(#94abc6, #d6b09c);
+  top: 40%;
+  right: 7%;
+  z-index: 0;
+  border-radius: 15px;
+
+}
+
+
+
+@media (max-width: 767px) {
+  .mypage {
+    height: auto;
+    min-height: auto;
+    /* display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding-bottom: 10%; */
+
+  }
+  
+.about-div {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1efd6;
+  padding-left: 6%;
+  padding-right: 6%;
+  scrollbar-width: none;
+  margin-top: 20%;
+  z-index: 1;
+  border-radius: 15px;
+  overflow: auto;
+    padding-top: 10%;
+  padding-bottom: 10%;
+}
+  
+#about-sample-1, #about-sample-2 {
+    display: none;
+  }
+}
+  
