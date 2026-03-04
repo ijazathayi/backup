@@ -46,6 +46,7 @@ const Two = () => {
           <div className="child2-child" id="child2-2">
             <button 
               onClick={() => navigate('/about')}
+              id="two-about-button"
             >
               Meet Ijaz
             </button>

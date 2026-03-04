@@ -1,0 +1,67 @@
+#othersigninbody{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: brown;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+}
+#othersignindiv{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: aqua;
+    border-radius: 18px;
+    position: relative;
+
+}
+#closebut{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 0;
+}
+.googleimg{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  #buttons button{
+    margin-top: 10px;
+    width: 80%;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #descript{
+    margin-top: 10px;
+    text-align: center;
+    line-height: 10px;
+  }

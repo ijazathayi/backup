@@ -26,7 +26,8 @@ const One = () => {
           <ul className="nav-links">
             <li><Link to="home" smooth={true} duration={500}> Home </Link></li>
             <li><Link to="projects" smooth={true} duration={500}> Projects</Link></li>
-            <li><button onClick={() => navigate('/contact')}> Contact </button></li>
+            <li><button onClick={() => navigate('/contact')}
+              className="nav-button"> Contact </button></li>
           </ul>
           <button id="one-list"><img src={list} alt="" width={"50px"} onClick={handleMenuToggle} style={{cursor:"pointer"}} /></button>
           {isMenuOpen && (
@@ -44,10 +45,10 @@ const One = () => {
             <span>I'm Ijaz, a</span>
             <WordFlick />
             <a href={resume} download>
-              <button> Download CV <span></span> </button>
+              <button className="uibutton"> Download CV <span></span> </button>
             </a>
             <Link to="projects" smooth={true} duration={500}>
-              <button> My works <span></span> </button>
+              <button className="uibutton"> My works <span></span> </button>
             </Link>
           </div>
         </div>

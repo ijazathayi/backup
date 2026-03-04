@@ -1,4 +1,4 @@
-button {
+.uibutton {
   border: none;
   display: block;
   position: relative;
@@ -15,7 +15,7 @@ button {
   margin-top: 20px;
 }
 
-button span {
+.uibutton span {
   position: absolute;
   left: 0;
   top: 0;
@@ -26,7 +26,7 @@ button span {
   border: 4px solid black;
 }
 
-button span::before {
+.uibutton span::before {
   content: "";
   display: block;
   position: absolute;
@@ -39,17 +39,17 @@ button span::before {
   transition: all 0.3s;
 }
 
-button:hover span::before {
+.uibutton:hover span::before {
   transform: translate(-50%, -50%) rotate(-90deg);
   width: 100%;
   background: black;
 }
 
-button:hover {
+.uibutton:hover {
   color: white;
 }
 
-button:active span::before {
+.uibutton:active span::before {
   background: grey;
 }
 
