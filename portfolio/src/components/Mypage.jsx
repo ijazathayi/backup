@@ -21,7 +21,7 @@ const Mypage = () => {
             data modeling, and performance optimization to inform an application's architecture.
              I then leverage the power of modern frameworks and APIs to deliver robust, scalable,
               and seamless user experiences.</p>
-          <button>Resumé <span></span></button>
+          <button className="uibutton" >Resumé <span></span></button>
 
         </div>
       </div>      

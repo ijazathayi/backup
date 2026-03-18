@@ -29,7 +29,8 @@ const One = () => {
             <li><button onClick={() => navigate('/contact')}
               className="nav-button"> Contact </button></li>
           </ul>
-          <button id="one-list"><img src={list} alt="" width={"50px"} onClick={handleMenuToggle} style={{cursor:"pointer"}} /></button>
+          <button id="one-list" style={{background:"transparent", borderRadius:"5px" }}>
+            <img src={list} alt="" width={"50px"} onClick={handleMenuToggle} style={{cursor:"pointer"}} /></button>
           {isMenuOpen && (
             <div id="one-mobile-menu" className="animate__animated animate__fadeInDown">
               <ul>

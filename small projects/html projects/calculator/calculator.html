@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>calculator</title>
+<link rel="stylesheet" href="calculator.css">
+</head>
+
+<body>
+<div id='calc-body'>
+  <div id="calc-content">
+    <input id="inp-screen" readonly />
+
+    <div id='but-body'>
+
+      <section>
+        <button class='clac-buttons spl-calc-but' onclick="clearDisplay()">C</button>
+        <button class='clac-buttons spl-calc-but' onclick="deleteLast()">DEL</button>
+        <button class='clac-buttons spl-calc-but' onclick="appendValue('*')">*</button>
+        <button class='clac-buttons spl-calc-but' onclick="appendValue('+')">+</button>
+      </section>
+
+      <section>
+        <button class='clac-buttons' onclick="appendValue('9')">9</button>
+        <button class='clac-buttons' onclick="appendValue('8')">8</button>
+        <button class='clac-buttons' onclick="appendValue('7')">7</button>
+        <button class='clac-buttons spl-calc-but' onclick="appendValue('-')">-</button>
+      </section>
+
+      <section>
+        <button class='clac-buttons' onclick="appendValue('6')">6</button>
+        <button class='clac-buttons' onclick="appendValue('5')">5</button>
+        <button class='clac-buttons' onclick="appendValue('4')">4</button>
+        <button class='clac-buttons spl-calc-but' onclick="appendValue('/')">/</button>
+      </section>
+
+      <section>
+        <button class='clac-buttons' onclick="appendValue('3')">3</button>
+        <button class='clac-buttons' onclick="appendValue('2')">2</button>
+        <button class='clac-buttons' onclick="appendValue('1')">1</button>
+        <button class='clac-buttons spl-calc-but' onclick="calculate()">=</button>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+const screen = document.getElementById("inp-screen");
+
+function appendValue(value){
+    screen.value += value;
+}
+
+function clearDisplay(){
+    screen.value = "";
+}
+
+function deleteLast(){
+    screen.value = screen.value.slice(0, -1);
+}
+
+function calculate(){
+    try{
+        screen.value = eval(screen.value);
+    }
+    catch{
+        screen.value = "Error";
+    }
+}
+
+</script>
+
+</body>
+</html>
