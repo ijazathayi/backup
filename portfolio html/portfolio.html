@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="uistyles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Tektur:wght@400..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Milonga&display=swap" rel="stylesheet">
+    <!-- Flickity CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+    <!-- Flickity JS -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">  -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> -->
+
+    <title>Portfolio</title>
+</head>
+
+<body>
+    <nav>
+        <div class="nav1">
+            <a href="#"><img src="./assets/favicon.png" alt="main-image"
+                    style="width: 115px; position: absolute; top: 10px;"></a>
+        </div>
+        <ul class="nav2">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Contact</a></li>
+
+        </ul>
+    </nav>
+    <div id="section1">
+        <div id="intro1">
+            <p id="section1-p">Hi I'm Ijaz, a</p>
+            <!-- <h1 id="section1-h11" class="section1-h1">I'm </h1> -->
+            <h1 id="section1-h12" class="section1-h1">
+                <a href="" class="typewrite" data-period="2000" data-type='[   
+                    " Front-End Developer.",
+                    " Back-End Developer.",
+                    " Database Developer.", 
+                    " Full-stack Developer." ]'>
+                    <span class="wrap"></span>
+                </a>
+            </h1>
+            <button>Download CV</button> <br>
+            <button>My works</button>
+        </div>
+    </div>
+    <div id="section2">
+        <div id="section2-back"></div>
+        <div id="section2-front">
+            <div id="front1"> Why, Hello</div>
+            <div id="front2">
+                <div id="front2-child1">
+                    <p> I’m Mohammed Ijaz, a full-stack developer skilled in React and Node.js.
+                        I build clean, scalable web applications with smooth user interfaces and
+                        solid backend systems. I’m comfortable with JavaScript, modern frameworks,
+                        APIs, and version control. Let’s work together!</p>
+                </div>
+                <div id="front2-child2">
+                    <button>Meet Ijaz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="section3">
+        <span>PROJECTS</span>
+        <!-- data-flickity-options='{ "wrapAround": true }' -->
+        <div id="section3-content" class="gallery js-flickity" data-flickity='{
+              "wrapAround": true,
+              "autoPlay": 2000,
+              "pauseAutoPlayOnHover": true
+            }'>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <button class="gallery-cell"></button>
+            <!-- <div class="gallery-cell"></div> -->
+        </div>
+    </div>
+    <div id="section4">
+        <div id="section4-content" class="stamp-border">
+            <div id="sect4-cont1">Upcomming..!</div>
+            <div id="sect4-cont2">This portfolio showcases a set of practical software projects
+                that highlight core development skills. It includes a responsive piano app,
+                a basic and scientific calculator, an age calculator with accurate date handling,
+                a real-time keyboard key checker, a secure webcam access tool with live preview, and
+                a simple E-Commerce front end with a catalog, cart, and mock checkout. Each project
+                focuses on MVP quality, accessibility, testing, and clear documentation.</div>
+        </div>
+    </div>
+    <footer>
+        
+    </footer>
+    <script src="styles.js"></script>
+</body>
+
+</html>
