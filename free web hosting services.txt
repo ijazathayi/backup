@@ -1,4 +1,0 @@
- 000webhost,
- ByetHost, 
-GoogieHost, and 
-AwardSpace
