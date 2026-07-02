@@ -1,0 +1,35 @@
+#homepage-body{
+    margin:0;
+    color: #333;
+    align-items: center;
+    text-align: center;
+    list-style-type: none;
+}
+.homepage-header{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.tool-list {
+    list-style-type: none;
+    flex-wrap: wrap;
+}
+.tools{
+    display: inline-block;
+    padding: 20px;
+    background-color:antiquewhite;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px ;
+}
+.link-tools {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+
+
+

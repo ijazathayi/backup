@@ -1,0 +1,21 @@
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  will-change: transform;
+}
+.item {
+  min-width: 120px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}

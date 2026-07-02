@@ -1,0 +1,131 @@
+a {
+  text-decoration: none;
+  color: blue;
+}
+#login-body {
+  height: 100vh;
+  width: 100%;
+  background: url("../images/nature.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#formback {
+  width: 400px;
+  height: 400px;
+  backdrop-filter: blur(7px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+}
+.sect {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#sectfour {
+  display: flex;
+  flex-direction: column;
+}
+.inputs {
+  width: 300px;
+  height: 40px;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+.submitbut {
+  width: 70px;
+  height: 30px;
+  font-size: 18px;
+  background-color: transparent;
+  border: 0 ;
+  border-radius: 14px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+.submitbut:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  transition: color 0.9s ease-in-out;
+  transition: background-color 0.9s ease-in-out;
+}
+.inputs::placeholder {
+  text-align: center;
+}
+.errors {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: center;
+}
+#createuser {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+
+#othersi{
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: black;
+  background: transparent;
+  /* linear-gradient(to right, black, white) */
+  border: 0;
+}
+#othersi:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  transition: color 0.9s ease-in-out;
+  transition: background-color 0.9s ease-in-out;
+  border-radius: 16px;
+}
+
+/* #loginback{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 83vh;
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+    #loginback form{
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    #loginback form div{
+        padding: 10px;
+        width: 90%;
+        height: 40px;
+    }
+    form div input{
+        width: 80%;
+        height: 80%;
+        border-radius: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
+    } */

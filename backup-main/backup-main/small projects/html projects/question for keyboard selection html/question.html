@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Q&A Flow</title>
+  <link rel="stylesheet" href="question.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Question 1 -->
+  <div class="question-box active" id="q1">
+    <h2>1. Do you like coding?</h2>
+    <button onclick="next(1, 'yes')">Yes</button>
+    <button onclick="next(1, 'no')">No</button>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="question-box" id="q2">
+    <h2>2. Which do you prefer?</h2>
+    <button onclick="next(2, 'frontend')">Frontend</button>
+    <button onclick="next(2, 'backend')">Backend</button>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="question-box" id="q3">
+    <h2>3. Do you like JavaScript?</h2>
+    <button onclick="next(3, 'yes')">Yes</button>
+    <button onclick="next(3, 'no')">No</button>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="question-box" id="q4">
+    <h2>4. Do you enjoy design?</h2>
+    <button onclick="next(4, 'yes')">Yes</button>
+    <button onclick="next(4, 'no')">No</button>
+  </div>
+
+  <!-- Question 5 -->
+  <div class="question-box" id="q5">
+    <h2>5. Are you learning React?</h2>
+    <button onclick="next(5, 'yes')">Yes</button>
+    <button onclick="next(5, 'no')">No</button>
+  </div>
+
+  <!-- Result -->
+  <div class="question-box" id="result">
+    <h2>Your Result</h2>
+    <img id="resultImage" src="" alt="Result Image">
+  </div>
+
+</div>
+
+<script>
+  let answers = [];
+
+  function next(qNum, answer) {
+    answers.push(answer);
+
+    // Hide current question
+    document.getElementById("q" + qNum).classList.remove("active");
+
+    // Show next
+    if (qNum < 5) {
+      document.getElementById("q" + (qNum + 1)).classList.add("active");
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    document.getElementById("result").classList.add("active");
+
+    let img = document.getElementById("resultImage");
+
+    // Simple logic based on answers
+    if (answers.includes("frontend")) {
+      img.src = "https://via.placeholder.com/300x200?text=Frontend+Developer";
+    } else if (answers.includes("backend")) {
+      img.src = "https://via.placeholder.com/300x200?text=Backend+Developer";
+    } else {
+      img.src = "https://via.placeholder.com/300x200?text=Full+Stack";
+    }
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Keyboard</title>
+    <link rel="stylesheet" href="question.css">
+</head>
+<body>
+    <section id="questions">
+        <div class="question" id="question1">
+            <h3>Which type of system your are using?</h3>
+        </div>
+    </section>
+    <section id="keyboard"></section>
+</body>
+</html> -->

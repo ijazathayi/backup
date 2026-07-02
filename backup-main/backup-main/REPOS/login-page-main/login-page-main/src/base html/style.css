@@ -1,0 +1,49 @@
+body{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#shrinked{
+  width: 200px;
+  height: 100px;
+  background-color: blueviolet;
+  border-radius: 10px;
+  border: 5px solid blue;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all ease 1s;
+  
+}
+#logo{
+  position: absolute;
+  top: 15px;
+}
+#overlogin{
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#shrinked:hover{
+  height: 500px;
+  width: 300px;
+}
+#shrinked:hover > #overlogin{
+  display: flex;
+}
+.inp{
+  width: 80%;
+  height: 30px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 15px;
+  text-align: center;
+}
