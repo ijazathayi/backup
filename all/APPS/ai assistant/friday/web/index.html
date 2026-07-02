@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Friday AI Assistant</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="assistant-shell">
+
+      <!-- ── Left stage ─────────────────────────────────────────────────────── -->
+      <section class="stage" aria-label="Friday assistant">
+
+        <div class="status-row">
+          <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+          <span id="statusText">Core Standby</span>
+          <span class="uptime" id="uptime"></span>
+        </div>
+
+        <!-- Settings toggle -->
+        <button class="settings-btn" id="settingsToggle" type="button"
+                aria-label="Settings" title="Settings">⚙</button>
+
+        <!-- Settings panel -->
+        <div class="settings-panel" id="settingsPanel" hidden>
+          <h2 class="settings-title">Settings</h2>
+
+          <label class="setting-row">
+            <span>Wake word</span>
+            <input id="wakeWordInput" type="text" value="friday" spellcheck="false" />
+          </label>
+
+          <label class="setting-row">
+            <span>Language</span>
+            <select id="langSelect">
+              <option value="en-US">English (US)</option>
+              <option value="en-GB">English (UK)</option>
+              <option value="ur-PK">Urdu</option>
+              <option value="ar-SA">Arabic</option>
+              <option value="fr-FR">French</option>
+              <option value="de-DE">German</option>
+              <option value="es-ES">Spanish</option>
+              <option value="hi-IN">Hindi</option>
+              <option value="zh-CN">Chinese (Mandarin)</option>
+              <option value="ja-JP">Japanese</option>
+            </select>
+          </label>
+
+          <label class="setting-row">
+            <span>Voice rate</span>
+            <input id="voiceRate" type="range" min="0.5" max="2" step="0.1" value="1" />
+            <span id="voiceRateVal">1.0×</span>
+          </label>
+
+          <label class="setting-row">
+            <span>Voice pitch</span>
+            <input id="voicePitch" type="range" min="0.5" max="2" step="0.1" value="1" />
+            <span id="voicePitchVal">1.0</span>
+          </label>
+
+          <label class="setting-row checkbox-row">
+            <input id="wakeWordEnabled" type="checkbox" checked />
+            <span>Always-on wake word detection</span>
+          </label>
+
+          <button class="settings-close" id="settingsClose" type="button">Done</button>
+        </div>
+
+        <!-- Orb ──────────────────────────────────────────────────────────────── -->
+        <div class="orb-wrap" aria-hidden="true">
+          <div class="orb" id="orb">
+            <div class="ring ring-one"></div>
+            <div class="ring ring-two"></div>
+            <div class="ring ring-three"></div>
+            <div class="core">F</div>
+          </div>
+        </div>
+
+        <h1>FRIDAY</h1>
+        <p class="subtitle" id="subtitle">
+          Rust core · Python brain · Browser voice interface
+        </p>
+
+        <!-- Controls ─────────────────────────────────────────────────────────── -->
+        <div class="controls" aria-label="Assistant controls">
+          <button class="primary" id="listenButton" type="button">
+            <span class="icon" aria-hidden="true">●</span> Start Listening
+          </button>
+          <button id="stopButton" type="button" disabled>
+            <span class="icon" aria-hidden="true">■</span> Stop
+          </button>
+          <button id="muteButton" type="button" aria-pressed="false">
+            <span class="icon" aria-hidden="true">🔊</span> Voice On
+          </button>
+        </div>
+
+        <!-- Wake-word badge ──────────────────────────────────────────────────── -->
+        <div class="wake-badge" id="wakeBadge">
+          <span class="wake-dot"></span>
+          Listening for "<span id="wakeWordDisplay">friday</span>"
+        </div>
+      </section>
+
+      <!-- ── Right console ──────────────────────────────────────────────────── -->
+      <section class="console" aria-label="Conversation">
+
+        <!-- Conversation panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Conversation</span>
+            <div class="panel-actions">
+              <button class="icon-btn" id="clearBtn"  type="button" title="Clear chat">🗑</button>
+              <button class="icon-btn" id="exportBtn" type="button" title="Export chat">⬇</button>
+            </div>
+          </div>
+          <div class="messages" id="messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+          <!-- Typing indicator -->
+          <div class="typing" id="typing" hidden aria-label="Friday is thinking">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- Text input -->
+        <div class="panel text-input-panel">
+          <form id="textForm" class="text-form">
+            <input
+              id="textInput"
+              type="text"
+              placeholder="Type a command or question…"
+              autocomplete="off"
+              aria-label="Type command"
+            />
+            <button type="submit" class="send-btn" aria-label="Send">➤</button>
+          </form>
+        </div>
+
+        <!-- Quick commands -->
+        <div class="panel">
+          <div class="panel-title">Quick Commands</div>
+          <div class="command-grid">
+            <button type="button" data-command="What time is it?">🕐 Time</button>
+            <button type="button" data-command="What is the date today?">📅 Date</button>
+            <button type="button" data-command="Weather in London">🌤 Weather</button>
+            <button type="button" data-command="Open YouTube">▶ YouTube</button>
+            <button type="button" data-command="Open Google">🔍 Google</button>
+            <button type="button" data-command="Open GitHub">🐙 GitHub</button>
+            <button type="button" data-command="Search for artificial intelligence">🔎 Search</button>
+            <button type="button" data-command="Play lo-fi music">🎵 Play music</button>
+            <button type="button" data-command="Calculate 25 * 48">🔢 Calculate</button>
+            <button type="button" data-command="Remember my project deadline is Friday">💾 Remember</button>
+            <button type="button" data-command="What do you remember?">🧠 Memory</button>
+            <button type="button" data-command="Tell me a joke">😂 Joke</button>
+            <button type="button" data-command="Note down buy groceries tomorrow">📝 Note</button>
+            <button type="button" data-command="Show my notes">📋 Notes</button>
+            <button type="button" data-command="What can you do?">❓ Help</button>
+            <button type="button" data-command="Goodbye">👋 Goodbye</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

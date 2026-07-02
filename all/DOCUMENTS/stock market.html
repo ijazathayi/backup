@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Market Master Course - Indian Markets (NSE/BSE)</title>
+
+<style>
+:root{
+    --bg:#f8f9fc;
+    --card:#ffffff;
+    --primary:#0b5ed7;
+    --text:#222;
+    --border:#dfe3ea;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.8;
+}
+
+header{
+    background:#0f172a;
+    color:white;
+    padding:40px;
+    text-align:center;
+}
+
+header h1{
+    font-size:3rem;
+}
+
+header p{
+    margin-top:10px;
+    opacity:.9;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:300px 1fr;
+}
+
+.sidebar{
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:auto;
+    background:white;
+    border-right:1px solid var(--border);
+    padding:20px;
+}
+
+.sidebar h2{
+    margin-bottom:15px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin-bottom:8px;
+}
+
+.sidebar a{
+    text-decoration:none;
+    color:#333;
+}
+
+.content{
+    padding:40px;
+}
+
+.chapter{
+    background:var(--card);
+    margin-bottom:25px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.chapter summary{
+    cursor:pointer;
+    padding:18px;
+    font-weight:600;
+    font-size:1.1rem;
+    background:#eef4ff;
+}
+
+.chapter-content{
+    padding:25px;
+}
+
+h2{
+    margin:20px 0;
+}
+
+h3{
+    margin:15px 0;
+}
+
+.diagram{
+    background:#111827;
+    color:#fff;
+    padding:20px;
+    border-radius:10px;
+    font-family:monospace;
+    overflow:auto;
+    margin:20px 0;
+}
+
+.note{
+    border-left:4px solid var(--primary);
+    background:#eef5ff;
+    padding:15px;
+    margin:20px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+table th{
+    background:#f2f2f2;
+}
+
+@media(max-width:900px){
+.container{
+    grid-template-columns:1fr;
+}
+.sidebar{
+    height:auto;
+    position:relative;
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Stock Market Master Course</h1>
+    <p>Complete Indian Markets Guide (NSE • BSE • F&O • Investing • Trading)</p>
+</header>
+
+<div class="container">
+
+<aside class="sidebar">
+<h2>Contents</h2>
+
+<ul>
+<li><a href="#module1">Module 1 - Financial Literacy</a></li>
+<li><a href="#module2">Module 2 - Market Structure</a></li>
+<li><a href="#module3">Module 3 - Technical Analysis</a></li>
+<li><a href="#module4">Module 4 - Fundamental Analysis</a></li>
+<li><a href="#module5">Module 5 - Futures & Options</a></li>
+<li><a href="#module6">Module 6 - Portfolio & Algo Trading</a></li>
+</ul>
+
+</aside>
+
+<main class="content">
+
+<section id="module1">
+
+<h2>Module 1: Financial Literacy</h2>
+
+<details class="chapter" open>
+<summary>Chapter 1: Money and Wealth Creation</summary>
+
+<div class="chapter-content">
+
+<p>
+Money is a medium of exchange that allows goods and services
+to be traded efficiently. In modern economies money also acts
+as a store of value and unit of account.
+</p>
+
+<h3>Functions of Money</h3>
+
+<ul>
+<li>Medium of Exchange</li>
+<li>Store of Value</li>
+<li>Unit of Account</li>
+<li>Deferred Payment Standard</li>
+</ul>
+
+<div class="diagram">
++-------------------+
+|      MONEY        |
++-------------------+
+          |
+    +-----+-----+
+    |           |
+ Exchange    Savings
+    |           |
+ Spending   Investing
+</div>
+
+<div class="note">
+Investing is the process of making money work for you instead
+of simply saving it in cash.
+</div>
+
+</div>
+</details>
+
+<details class="chapter">
+<summary>Chapter 2: Inflation</summary>
+
+<div class="chapter-content">
+
+<p>
+Inflation is the rate at which prices rise over time.
+As inflation increases, purchasing power decreases.
+</p>
+
+<div class="diagram">
+₹100 Today
+    |
+Inflation 6%
+    |
+₹94 Purchasing Power
+    |
+₹88 Purchasing Power
+</div>
+
+<table>
+<tr>
+<th>Inflation</th>
+<th>Effect</th>
+</tr>
+
+<tr>
+<td>Low</td>
+<td>Stable economy</td>
+</tr>
+
+<tr>
+<td>Moderate</td>
+<td>Growth phase</td>
+</tr>
+
+<tr>
+<td>High</td>
+<td>Reduced purchasing power</td>
+</tr>
+</table>
+
+</div>
+</details>
+
+</section>
+
+<section id="module2">
+
+<h2>Module 2: Indian Market Structure</h2>
+
+<details class="chapter">
+<summary>NSE, BSE, SEBI, RBI</summary>
+
+<div class="chapter-content">
+
+<h3>Market Ecosystem</h3>
+
+<div class="diagram">
+┌─────────┐
+│Investor │
+└────┬────┘
+     │
+┌────▼────┐
+│ Broker  │
+└────┬────┘
+     │
+┌────▼────┐
+│ NSE/BSE │
+└────┬────┘
+     │
+┌────▼─────────┐
+│ Clearing Corp│
+└────┬─────────┘
+     │
+┌────▼───────┐
+│ NSDL/CDSL  │
+└────────────┘
+</div>
+
+<p>
+The National Stock Exchange and Bombay Stock Exchange
+provide trading infrastructure for Indian securities markets.
+SEBI regulates and supervises the market.
+</p>
+
+</div>
+</details>
+
+</section>
+
+<section id="module3">
+
+<h2>Module 3: Technical Analysis</h2>
+
+<details class="chapter">
+<summary>Candlestick Analysis</summary>
+
+<div class="chapter-content">
+
+<h3>Candlestick Anatomy</h3>
+
+<div class="diagram">
+      High
+       |
+       |
+   +---+---+
+   | Body  |
+   +---+---+
+       |
+       |
+      Low
+</div>
+
+<p>
+Candlesticks show open, high, low and close prices.
+They reveal market psychology and trader sentiment.
+</p>
+
+</div>
+</details>
+
+<details class="chapter">
+<summary>Trend Structure</summary>
+
+<div class="chapter-content">
+
+<div class="diagram">
+Price
+ ^
+ |
+ |       HH
+ |      /
+ |     /
+ | HL
+ |
+ +--------------> Time
+</div>
+
+<p>
+An uptrend consists of Higher Highs (HH)
+and Higher Lows (HL).
+</p>
+
+</div>
+</details>
+
+</section>
+
+<section id="module4">
+
+<h2>Module 4: Fundamental Analysis</h2>
+
+<details class="chapter">
+<summary>Financial Statements</summary>
+
+<div class="chapter-content">
+
+<div class="diagram">
+Assets
+   =
+Liabilities
+   +
+ Equity
+</div>
+
+<p>
+The balance sheet provides a snapshot of a company's
+financial position at a specific point in time.
+</p>
+
+</div>
+</details>
+
+</section>
+
+<section id="module5">
+
+<h2>Module 5: Futures & Options</h2>
+
+<details class="chapter">
+<summary>Call and Put Options</summary>
+
+<div class="chapter-content">
+
+<div class="diagram">
+Profit
+ ^
+ |
+ |       /
+ |      /
+ |     /
+ |____/_________
+      Strike
+</div>
+
+<p>
+A call option gives the right but not obligation
+to buy an asset at a predetermined price.
+</p>
+
+</div>
+</details>
+
+</section>
+
+<section id="module6">
+
+<h2>Module 6: Portfolio & Algo Trading</h2>
+
+<details class="chapter">
+<summary>Risk Management</summary>
+
+<div class="chapter-content">
+
+<div class="diagram">
+Capital
+   |
+Position Size
+   |
+Stop Loss
+   |
+Risk Control
+</div>
+
+<p>
+Risk management protects trading capital and ensures
+long-term survival in financial markets.
+</p>
+
+</div>
+</details>
+
+</section>
+
+</main>
+</div>
+
+</body>
+</html>
