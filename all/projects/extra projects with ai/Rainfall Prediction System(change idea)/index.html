@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rainfall Prediction System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated Rain Background -->
+  <div class="rain-container" id="rainContainer"></div>
+  <div class="bg-glow"></div>
+
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-icon">
+        <span class="cloud-icon">⛅</span>
+        <div class="rain-drops-icon">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="header-text">
+        <h1 class="gradient-title">Rainfall Prediction System</h1>
+        <p class="header-sub">AI-powered weather analysis &amp; rainfall forecasting</p>
+      </div>
+    </header>
+
+    <div class="main-grid">
+
+      <!-- Input Panel -->
+      <section class="input-panel glass-card">
+        <div class="panel-header">
+          <span class="panel-icon">🎛️</span>
+          <h2>Weather Parameters</h2>
+        </div>
+
+        <div class="sliders-grid">
+
+          <!-- Temperature -->
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="temperature">🌡️ Temperature</label>
+              <span class="value-badge" id="tempVal">20 °C</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="temperature" min="-10" max="50" value="20" class="slider" />
+              <div class="slider-fill" id="tempFill"></div>
+            </div>
+            <div class="slider-minmax"><span>-10°C</span><span>50°C</span></div>
+          </div>
+
+          <!-- Humidity -->
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="humidity">💧 Humidity</label>
+              <span class="value-badge" id="humVal">60 %</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="humidity" min="0" max="100" value="60" class="slider" />
+              <div class="slider-fill" id="humFill"></div>
+            </div>
+            <div class="slider-minmax"><span>0%</span><span>100%</span></div>
+          </div>
+
+          <!-- Pressure -->
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="pressure">🔵 Pressure</label>
+              <span class="value-badge" id="pressVal">1013 hPa</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="pressure" min="950" max="1050" value="1013" class="slider" />
+              <div class="slider-fill" id="pressFill"></div>
+            </div>
+            <div class="slider-minmax"><span>950 hPa</span><span>1050 hPa</span></div>
+          </div>
+
+          <!-- Wind Speed -->
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="windSpeed">💨 Wind Speed</label>
+              <span class="value-badge" id="windVal">15 km/h</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="windSpeed" min="0" max="100" value="15" class="slider" />
+              <div class="slider-fill" id="windFill"></div>
+            </div>
+            <div class="slider-minmax"><span>0 km/h</span><span>100 km/h</span></div>
+          </div>
+
+          <!-- Cloud Cover -->
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="cloudCover">☁️ Cloud Cover</label>
+              <span class="value-badge" id="cloudVal">40 %</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="cloudCover" min="0" max="100" value="40" class="slider" />
+              <div class="slider-fill" id="cloudFill"></div>
+            </div>
+            <div class="slider-minmax"><span>0%</span><span>100%</span></div>
+          </div>
+
+        </div>
+
+        <div class="dropdowns-row">
+          <!-- Season -->
+          <div class="dropdown-group">
+            <label for="season">🍂 Season</label>
+            <div class="select-wrapper">
+              <select id="season">
+                <option value="spring">🌸 Spring</option>
+                <option value="summer" selected>☀️ Summer</option>
+                <option value="autumn">🍁 Autumn</option>
+                <option value="winter">❄️ Winter</option>
+              </select>
+              <span class="select-arrow">▼</span>
+            </div>
+          </div>
+
+          <!-- Region -->
+          <div class="dropdown-group">
+            <label for="region">🗺️ Region</label>
+            <div class="select-wrapper">
+              <select id="region">
+                <option value="coastal">🌊 Coastal</option>
+                <option value="mountain">⛰️ Mountain</option>
+                <option value="desert">🏜️ Desert</option>
+                <option value="plain" selected>🌾 Plain</option>
+                <option value="tropical">🌴 Tropical</option>
+              </select>
+              <span class="select-arrow">▼</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-row">
+          <button class="btn-predict" id="predictBtn" onclick="predict()">
+            <span class="btn-icon">🌧️</span>
+            <span>Predict Rainfall</span>
+          </button>
+          <button class="btn-random" id="randomBtn" onclick="randomWeather()">
+            <span class="btn-icon">🎲</span>
+            <span>Random Weather</span>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Results Panel -->
+      <section class="results-panel">
+
+        <!-- Current Conditions Summary -->
+        <div class="conditions-card glass-card" id="conditionsCard">
+          <div class="conditions-title">
+            <span>📊</span> Current Conditions Summary
+          </div>
+          <div class="conditions-grid" id="conditionsGrid">
+            <div class="condition-item">
+              <span class="cond-icon">🌡️</span>
+              <span class="cond-label">Temperature</span>
+              <span class="cond-value" id="condTemp">20°C</span>
+            </div>
+            <div class="condition-item">
+              <span class="cond-icon">💧</span>
+              <span class="cond-label">Humidity</span>
+              <span class="cond-value" id="condHum">60%</span>
+            </div>
+            <div class="condition-item">
+              <span class="cond-icon">🔵</span>
+              <span class="cond-label">Pressure</span>
+              <span class="cond-value" id="condPress">1013 hPa</span>
+            </div>
+            <div class="condition-item">
+              <span class="cond-icon">💨</span>
+              <span class="cond-label">Wind</span>
+              <span class="cond-value" id="condWind">15 km/h</span>
+            </div>
+            <div class="condition-item">
+              <span class="cond-icon">☁️</span>
+              <span class="cond-label">Cloud Cover</span>
+              <span class="cond-value" id="condCloud">40%</span>
+            </div>
+            <div class="condition-item">
+              <span class="cond-icon">🌍</span>
+              <span class="cond-label">Region</span>
+              <span class="cond-value" id="condRegion">Plain</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Prediction Result -->
+        <div class="prediction-card glass-card" id="predictionCard">
+          <div class="prediction-placeholder" id="predPlaceholder">
+            <div class="placeholder-icon">🌤️</div>
+            <p>Set weather parameters and click<br/><strong>Predict Rainfall</strong> to see results</p>
+          </div>
+
+          <div class="prediction-result hidden" id="predResult">
+            <div class="result-top">
+              <div class="weather-icon-big" id="weatherIconBig">🌧️</div>
+              <div class="result-info">
+                <div class="result-category" id="resultCategory">Heavy Rain</div>
+                <div class="result-mm">
+                  <span class="mm-number" id="mmNumber">0</span>
+                  <span class="mm-unit">mm</span>
+                  <span class="mm-label">predicted</span>
+                </div>
+              </div>
+              <!-- Circular Probability Gauge -->
+              <div class="gauge-wrapper">
+                <svg class="gauge-svg" viewBox="0 0 120 120">
+                  <circle class="gauge-bg" cx="60" cy="60" r="50" />
+                  <circle class="gauge-fill" id="gaugeFill" cx="60" cy="60" r="50"
+                    stroke-dasharray="314"
+                    stroke-dashoffset="314"
+                    transform="rotate(-90 60 60)" />
+                </svg>
+                <div class="gauge-text">
+                  <span class="gauge-pct" id="gaugePct">0%</span>
+                  <span class="gauge-sub">probability</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Category Badge -->
+            <div class="category-badge" id="categoryBadge">
+              <span id="badgeIcon">🌧️</span>
+              <span id="badgeText">Heavy Rain</span>
+            </div>
+
+            <!-- Key Factors -->
+            <div class="factors-section">
+              <div class="factors-title">🔍 Key Factors</div>
+              <div class="factors-list" id="factorsList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7-Day Forecast -->
+        <div class="forecast-card glass-card" id="forecastCard">
+          <div class="forecast-title">
+            <span>📅</span> 7-Day Rainfall Forecast
+          </div>
+          <div class="forecast-placeholder" id="forecastPlaceholder">
+            <p>Run prediction to see 7-day forecast</p>
+          </div>
+          <div class="forecast-chart hidden" id="forecastChart">
+            <div class="chart-bars" id="chartBars"></div>
+            <div class="chart-legend">
+              <span class="legend-dot none"></span><span>None</span>
+              <span class="legend-dot light"></span><span>Light</span>
+              <span class="legend-dot moderate"></span><span>Moderate</span>
+              <span class="legend-dot heavy"></span><span>Heavy</span>
+              <span class="legend-dot very-heavy"></span><span>Very Heavy</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p>🌧️ Rainfall Prediction System &nbsp;•&nbsp; Rule-based meteorological analysis &nbsp;•&nbsp; Built with pure JavaScript</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Salary Prediction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated ambient background -->
+  <div class="ambient-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" fill="url(#grad1)" opacity="0.15"/>
+          <!-- Brain shape -->
+          <path d="M16 18c0-3.3 2.7-6 6-6 1.2 0 2.3.4 3.2 1C26 11.8 27.8 11 30 11c3.3 0 6 2.7 6 6 0 1-.2 1.9-.6 2.7C36.4 20.8 37 22.3 37 24c0 3.3-2.7 6-6 6h-1v2a2 2 0 01-4 0v-2h-2v2a2 2 0 01-4 0v-2c-2.2 0-4-1.8-4-4 0-1.4.7-2.6 1.7-3.4C17.2 21.7 16 20 16 18z" fill="url(#grad2)"/>
+          <!-- Chart bars -->
+          <rect x="10" y="30" width="4" height="10" rx="1" fill="url(#grad3)" opacity="0.8"/>
+          <rect x="16" y="26" width="4" height="14" rx="1" fill="url(#grad3)" opacity="0.9"/>
+          <rect x="22" y="22" width="4" height="18" rx="1" fill="url(#grad3)"/>
+          <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="48" y2="48">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+            <linearGradient id="grad2" x1="16" y1="11" x2="37" y2="34">
+              <stop offset="0%" stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#c084fc"/>
+            </linearGradient>
+            <linearGradient id="grad3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1 class="header-title">Employee Salary Prediction</h1>
+        <p class="header-subtitle">AI-powered linear regression model &mdash; instant, accurate estimates</p>
+      </div>
+    </header>
+
+    <!-- Sample Profiles -->
+    <div class="sample-profiles">
+      <span class="sample-label">Quick load:</span>
+      <button class="profile-btn" data-profile="junior">
+        <span class="profile-icon">👨‍💻</span> Junior Dev
+      </button>
+      <button class="profile-btn" data-profile="senior">
+        <span class="profile-icon">🧑‍🔬</span> Senior Dev
+      </button>
+      <button class="profile-btn" data-profile="manager">
+        <span class="profile-icon">👔</span> Manager
+      </button>
+    </div>
+
+    <!-- Main layout -->
+    <div class="main-layout">
+
+      <!-- Input Form -->
+      <section class="form-card">
+        <div class="card-header">
+          <span class="card-icon">⚙️</span>
+          <h2>Input Parameters</h2>
+        </div>
+
+        <form id="salaryForm">
+
+          <!-- Years of Experience -->
+          <div class="form-group">
+            <label for="experience">
+              Years of Experience
+              <span class="value-badge" id="expBadge">0 yrs</span>
+            </label>
+            <div class="slider-row">
+              <input type="range" id="experience" min="0" max="40" value="0" step="1" class="slider" />
+              <input type="number" id="experienceNum" min="0" max="40" value="0" class="num-input" />
+            </div>
+            <div class="slider-track-labels">
+              <span>0</span><span>10</span><span>20</span><span>30</span><span>40</span>
+            </div>
+          </div>
+
+          <!-- Education Level -->
+          <div class="form-group">
+            <label for="education">Education Level</label>
+            <div class="select-wrapper">
+              <select id="education" class="select-input">
+                <option value="highschool">🎓 High School</option>
+                <option value="bachelor" selected>🎓 Bachelor's Degree</option>
+                <option value="master">🎓 Master's Degree</option>
+                <option value="phd">🎓 PhD</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Job Role -->
+          <div class="form-group">
+            <label for="role">Job Role</label>
+            <div class="select-wrapper">
+              <select id="role" class="select-input">
+                <option value="junior" selected>Junior Developer</option>
+                <option value="senior">Senior Developer</option>
+                <option value="manager">Manager</option>
+                <option value="director">Director</option>
+                <option value="vp">VP</option>
+                <option value="clevel">C-Level Executive</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Skills Score -->
+          <div class="form-group">
+            <label for="skills">
+              Skills Score
+              <span class="value-badge" id="skillsBadge">50 / 100</span>
+            </label>
+            <div class="slider-row">
+              <input type="range" id="skills" min="0" max="100" value="50" step="1" class="slider" />
+              <input type="number" id="skillsNum" min="0" max="100" value="50" class="num-input" />
+            </div>
+            <div class="slider-track-labels">
+              <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-group">
+            <label for="location">Location</label>
+            <div class="select-wrapper">
+              <select id="location" class="select-input">
+                <option value="rural">🌾 Rural</option>
+                <option value="smallcity">🏘️ Small City</option>
+                <option value="midcity" selected>🏙️ Mid City</option>
+                <option value="largecity">🌆 Large City</option>
+                <option value="metro">🌃 Metro</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Industry -->
+          <div class="form-group">
+            <label for="industry">Industry</label>
+            <div class="select-wrapper">
+              <select id="industry" class="select-input">
+                <option value="retail">🛒 Retail</option>
+                <option value="education">📚 Education</option>
+                <option value="manufacturing">🏭 Manufacturing</option>
+                <option value="healthcare">🏥 Healthcare</option>
+                <option value="finance">💰 Finance</option>
+                <option value="tech" selected>💻 Technology</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="predict-btn" id="predictBtn">
+            <span class="btn-icon">🔮</span>
+            <span class="btn-text">Predict Salary</span>
+            <span class="btn-shimmer"></span>
+          </button>
+
+        </form>
+      </section>
+
+      <!-- Results Section -->
+      <section class="results-card" id="resultsCard">
+
+        <!-- Placeholder state -->
+        <div class="results-placeholder" id="placeholder">
+          <div class="placeholder-icon">💼</div>
+          <p>Fill in the parameters and click <strong>Predict Salary</strong> to see your results</p>
+        </div>
+
+        <!-- Results content (hidden until prediction) -->
+        <div class="results-content" id="resultsContent" style="display:none;">
+
+          <div class="card-header">
+            <span class="card-icon">📊</span>
+            <h2>Prediction Results</h2>
+            <div class="confidence-pill" id="confidencePill">
+              <span class="pulse-dot"></span>
+              <span id="confidenceText">95% Confidence</span>
+            </div>
+          </div>
+
+          <!-- Main salary display -->
+          <div class="salary-display">
+            <div class="salary-label">Predicted Annual Salary</div>
+            <div class="salary-amount" id="salaryAmount">$0</div>
+            <div class="salary-sub">
+              <span class="monthly-badge">
+                <span class="monthly-icon">📅</span>
+                <span id="monthlySalary">$0 / month</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Salary range -->
+          <div class="range-section">
+            <div class="range-label">Salary Range</div>
+            <div class="range-bar-wrapper">
+              <span class="range-min" id="rangeMin">$0</span>
+              <div class="range-track">
+                <div class="range-fill" id="rangeFill"></div>
+                <div class="range-marker" id="rangeMarker"></div>
+              </div>
+              <span class="range-max" id="rangeMax">$0</span>
+            </div>
+          </div>
+
+          <!-- Industry comparison -->
+          <div class="comparison-section">
+            <div class="comparison-label">vs. Industry Average</div>
+            <div class="comparison-row" id="comparisonRow">
+              <div class="comp-bar-wrapper">
+                <div class="comp-bar your-bar" id="yourBar">
+                  <span class="comp-bar-label">Your Salary</span>
+                  <span class="comp-bar-value" id="yourBarValue">$0</span>
+                </div>
+                <div class="comp-bar avg-bar" id="avgBar">
+                  <span class="comp-bar-label">Industry Avg</span>
+                  <span class="comp-bar-value" id="avgBarValue">$0</span>
+                </div>
+              </div>
+              <div class="comp-delta" id="compDelta"></div>
+            </div>
+          </div>
+
+          <!-- Factors chart -->
+          <div class="factors-section">
+            <div class="factors-label">Salary Factors Contribution</div>
+            <div class="factors-chart" id="factorsChart"></div>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- end main-layout -->
+  </div><!-- end container -->
+
+  <script src="app.js"></script>
+</body>
+</html>

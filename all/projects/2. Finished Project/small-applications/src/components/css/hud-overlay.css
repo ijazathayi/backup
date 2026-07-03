@@ -1,0 +1,381 @@
+/* hud-overlay.css — JARVIS Real-Time Data Panels */
+
+/* ─── Overlay Container ─────────────────────────────────────────────────────── */
+.hud-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+}
+
+/* ─── Base Panel ─────────────────────────────────────────────────────────────── */
+.hud-panel {
+  position: absolute;
+  background: rgba(0, 8, 18, 0.78);
+  border: 1px solid rgba(0, 212, 255, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 13px;
+  min-width: 180px;
+  box-shadow:
+    0 0 18px rgba(0, 212, 255, 0.12),
+    inset 0 0 20px rgba(0, 212, 255, 0.03);
+  animation: hud-fadein 0.8s ease forwards;
+}
+
+/* Corner brackets – top-left */
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 10px; height: 10px;
+  border-top: 1.5px solid var(--accent-color);
+  border-left: 1.5px solid var(--accent-color);
+  box-shadow: -1px -1px 5px rgba(0,212,255,0.6);
+}
+
+/* Corner brackets – bottom-right */
+.hud-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; right: -1px;
+  width: 10px; height: 10px;
+  border-bottom: 1.5px solid var(--accent-color);
+  border-right: 1.5px solid var(--accent-color);
+  box-shadow: 1px 1px 5px rgba(0,212,255,0.6);
+}
+
+@keyframes hud-fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Panel Positions ─────────────────────────────────────────────────────────── */
+
+/* Top-left: JARVIS identity + system info */
+.hud-top-left {
+  top: 38px;
+  left: 10px;
+  width: 210px;
+  animation-delay: 0s;
+}
+
+/* Top-right: Clock */
+.hud-top-right {
+  top: 38px;
+  right: 10px;
+  width: 230px;
+  text-align: right;
+  animation-delay: 0.1s;
+}
+
+/* Left side: CPU / RAM / GPU */
+.hud-left-metrics {
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 200px;
+  animation-delay: 0.2s;
+}
+
+/* Right side: Weather */
+.hud-right-weather {
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 230px;
+  animation-delay: 0.3s;
+}
+
+/* Bottom-left: Network */
+.hud-bottom-left {
+  bottom: 12px;
+  left: 10px;
+  width: 210px;
+  animation-delay: 0.4s;
+}
+
+/* Bottom-right: Disk I/O */
+.hud-bottom-right {
+  bottom: 12px;
+  right: 10px;
+  width: 210px;
+  animation-delay: 0.5s;
+}
+
+/* ─── Panel Label / Section Header ─────────────────────────────────────────── */
+.hud-panel-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  color: rgba(0, 212, 255, 0.7);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  padding-bottom: 4px;
+}
+
+/* ─── Generic Key-Value Rows ─────────────────────────────────────────────── */
+.hud-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 3px 0;
+}
+
+.hud-key {
+  font-size: 0.6rem;
+  color: rgba(0, 212, 255, 0.55);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hud-val {
+  font-size: 0.68rem;
+  color: #c8f0ff;
+  letter-spacing: 0.06em;
+  text-align: right;
+  text-shadow: 0 0 6px rgba(0, 212, 255, 0.5);
+}
+
+.hud-val.uptime {
+  color: #00ff88;
+  text-shadow: 0 0 6px rgba(0, 255, 136, 0.5);
+  font-size: 0.75rem;
+}
+
+.hud-val.sunrise { color: #ffd700; text-shadow: 0 0 6px rgba(255, 215, 0, 0.5); }
+.hud-val.sunset  { color: #ff8c42; text-shadow: 0 0 6px rgba(255, 140, 66, 0.4); }
+
+/* ─── Divider ─────────────────────────────────────────────────────────────── */
+.hud-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+  margin: 7px 0;
+}
+
+/* ─── JARVIS Identity ─────────────────────────────────────────────────────── */
+.hud-identity-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+
+.hud-version {
+  font-size: 0.62rem;
+  color: rgba(0,212,255,0.6);
+  letter-spacing: 0.08em;
+}
+
+.hud-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 6px #00ff88;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 4px #00ff88; }
+  50% { box-shadow: 0 0 12px #00ff88, 0 0 20px rgba(0,255,136,0.5); }
+}
+
+.hud-status-text {
+  font-size: 0.6rem;
+  color: #00ff88;
+  letter-spacing: 0.14em;
+  text-shadow: 0 0 6px rgba(0,255,136,0.6);
+}
+
+/* ─── Clock ──────────────────────────────────────────────────────────────── */
+.hud-clock {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 4px 0 2px;
+}
+
+.hud-clock-time {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #00d4ff;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.3);
+  animation: hud-flicker 7s ease-in-out infinite;
+}
+
+.hud-clock-ampm {
+  font-size: 0.7rem;
+  color: rgba(0, 212, 255, 0.7);
+  letter-spacing: 0.1em;
+  align-self: center;
+}
+
+.hud-clock-date {
+  font-size: 0.65rem;
+  color: #5ba8cc;
+  letter-spacing: 0.08em;
+  text-align: right;
+  margin-bottom: 3px;
+}
+
+.hud-tz {
+  font-size: 0.58rem;
+  color: rgba(0,212,255,0.4);
+  letter-spacing: 0.1em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+/* ─── Bar Meter ──────────────────────────────────────────────────────────── */
+.hud-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 5px 0 3px;
+}
+
+.hud-bar-label {
+  font-size: 0.58rem;
+  color: rgba(0,212,255,0.55);
+  letter-spacing: 0.1em;
+  width: 24px;
+  text-transform: uppercase;
+}
+
+.hud-bar-track {
+  flex: 1;
+  height: 5px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.hud-bar-fill {
+  height: 100%;
+  transition: width 0.8s ease;
+  border-radius: 0;
+}
+
+.hud-bar-val {
+  font-size: 0.6rem;
+  width: 30px;
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Sparkline ──────────────────────────────────────────────────────────── */
+.hud-sparkline-row {
+  margin: 4px 0;
+  padding-left: 2px;
+}
+
+/* ─── Weather Panel ──────────────────────────────────────────────────────── */
+.hud-location {
+  font-size: 0.65rem;
+  color: #5ba8cc;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.hud-temp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.hud-temp-big {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #00d4ff;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+}
+
+.hud-temp-sub {
+  font-size: 0.72rem;
+  color: rgba(0,212,255,0.5);
+  letter-spacing: 0.06em;
+}
+
+.hud-weather-desc {
+  font-size: 0.64rem;
+  color: #c8f0ff;
+  letter-spacing: 0.14em;
+  margin-bottom: 4px;
+}
+
+.hud-loading {
+  padding: 12px 0;
+  font-size: 0.65rem;
+  color: rgba(0,212,255,0.6);
+  letter-spacing: 0.14em;
+}
+
+.hud-error {
+  padding: 8px 0;
+  font-size: 0.65rem;
+  color: #ff3355;
+  letter-spacing: 0.12em;
+}
+
+.hud-blink {
+  animation: blink-text 1.2s step-start infinite;
+}
+
+@keyframes blink-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* ─── Network Panel ──────────────────────────────────────────────────────── */
+.hud-net-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 6px 0 4px;
+}
+
+.hud-net-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hud-net-dir {
+  font-size: 0.58rem;
+  color: rgba(0,212,255,0.55);
+  letter-spacing: 0.12em;
+}
+
+.hud-net-val {
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.hud-net-val.up   { color: #00ff88; text-shadow: 0 0 6px rgba(0,255,136,0.5); }
+.hud-net-val.down { color: #00d4ff; text-shadow: 0 0 6px rgba(0,212,255,0.5); }
+
+/* ─── Responsive – hide on tiny screens ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .hud-left-metrics,
+  .hud-right-weather {
+    display: none;
+  }
+  .hud-top-left  { width: 180px; font-size: 0.85em; }
+  .hud-top-right { width: 200px; font-size: 0.85em; }
+  .hud-bottom-left, .hud-bottom-right { width: 170px; }
+}
+
+@media (max-width: 600px) {
+  .hud-overlay { display: none; }
+}

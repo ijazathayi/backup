@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NLP Text Summarizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="container">
+    <header class="header">
+      <div class="logo-wrap">
+        <div class="logo-icon">📝</div>
+        <div>
+          <h1 class="title">NLP Text Summarizer</h1>
+          <p class="subtitle">Extractive summarization with TF-IDF scoring — no API needed</p>
+        </div>
+      </div>
+      <div class="header-badge"><span class="badge-dot"></span>TF-IDF Engine</div>
+    </header>
+
+    <div class="top-controls">
+      <div class="sample-btns">
+        <span class="sample-label">Load sample:</span>
+        <button class="sample-btn" data-sample="news">📰 News Article</button>
+        <button class="sample-btn" data-sample="research">🔬 Research Abstract</button>
+        <button class="sample-btn" data-sample="story">📖 Story</button>
+      </div>
+      <div class="length-control">
+        <span class="length-label">Summary length:</span>
+        <div class="length-btns">
+          <button class="len-btn" data-pct="0.25">Short</button>
+          <button class="len-btn active" data-pct="0.40">Medium</button>
+          <button class="len-btn" data-pct="0.60">Long</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <div class="input-panel">
+        <div class="panel-header">
+          <div class="panel-title"><div class="pdot pdot-blue"></div>Input Text</div>
+          <div class="panel-actions">
+            <span class="wc-badge" id="inputWc">0 words</span>
+            <button class="icon-btn" id="clearInputBtn">🗑️ Clear</button>
+          </div>
+        </div>
+        <textarea id="inputArea" class="text-area" placeholder="Paste your text here to summarize…"></textarea>
+        <button class="summarize-btn" id="summarizeBtn">⚡ Summarize Text</button>
+      </div>
+
+      <div class="output-panel">
+        <div class="panel-header">
+          <div class="panel-title"><div class="pdot pdot-green"></div>Summary</div>
+          <div class="panel-actions">
+            <span class="compression-badge" id="compressionBadge" style="display:none;"></span>
+            <button class="icon-btn" id="copySummaryBtn" disabled>📋 Copy</button>
+          </div>
+        </div>
+        <div class="summary-area" id="summaryArea">
+          <div class="output-placeholder">
+            <div class="ph-icon">📄</div>
+            <p>Your summary will appear here</p>
+            <p class="ph-sub">Paste text and click Summarize</p>
+          </div>
+        </div>
+
+        <div class="stats-row" id="statsRow" style="display:none;">
+          <div class="stat-chip"><span id="origWc">0</span> original words</div>
+          <div class="stat-chip green"><span id="summWc">0</span> summary words</div>
+          <div class="stat-chip accent"><span id="compRatio">0%</span> compression</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="keywords-section" id="keywordsSection" style="display:none;">
+      <div class="kw-header">
+        <span class="kw-icon">🔑</span>
+        <h2>Top Keywords</h2>
+        <span class="kw-sub">Extracted by TF-IDF frequency analysis</span>
+      </div>
+      <div class="keywords-grid" id="keywordsGrid"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

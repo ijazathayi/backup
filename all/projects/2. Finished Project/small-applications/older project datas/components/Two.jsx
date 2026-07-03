@@ -1,0 +1,63 @@
+import React from "react";
+import { useNavigate } from "react-router-dom"; 
+import Three from "./Three";
+import './css/two.css'
+import { useEffect, useRef, useState } from "react";
+
+ 
+
+
+const Two = () => {
+  
+  const navigate = useNavigate();
+  const twoCenterRef = useRef(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShow(true);
+          observer.disconnect(); // animate only once
+        }
+      },
+      { threshold: 0.3 }
+    );
+     if (twoCenterRef.current) {
+      observer.observe(twoCenterRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+  
+
+  return(
+    <div className=" section">
+      <div className="two">
+      <div id="two-back"></div>
+      <div id="two-center" ref={twoCenterRef} className={show ? "fade-in-right" : ""} >
+        <div id="two-center-child1"> Why, Hello</div>
+        <div id="two-center-child2">
+          <div className="child2-child" id="child2-1">
+            I’m Mohammed Ijaz, a full-stack developer skilled in React and Node.js. 
+            I build clean, scalable web applications with smooth user interfaces and solid backend systems.
+            I’m comfortable with JavaScript, modern frameworks, APIs, and version control. Let’s work together!
+          </div>
+          <div className="child2-child" id="child2-2">
+            <button 
+              onClick={() => navigate('/about')}
+              id="two-about-button"
+            >
+              Meet Ijaz
+            </button>
+          </div>
+
+        </div>
+      </div>
+      </div>
+      <Three />
+    </div>
+  )
+};
+
+export default Two;

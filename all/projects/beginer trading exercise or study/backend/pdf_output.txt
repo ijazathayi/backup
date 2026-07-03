@@ -1,0 +1,3 @@
+Error: getDocument - no `url` parameter provided.
+Error: getDocument - no `url` parameter provided.
+    at D:\IJAZ CORPRATION\IJAZ PROJECTS\beginer trading exercise or study\backend\node_modules\pdf-parse\dist\pdf-parse\cjs\index.cjs:1:273996

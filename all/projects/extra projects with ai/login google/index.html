@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Glassmorphic Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Animated Blobs -->
+    <div class="background-decorations">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <main class="login-container">
+        
+        <!-- ============================================== -->
+        <!-- SIGN IN CARD -->
+        <!-- ============================================== -->
+        <div class="glass-panel card" id="loginCard">
+            <div class="card-header">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-fingerprint"></i>
+                </div>
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Enter your details to securely sign in</p>
+            </div>
+
+            <form id="loginForm" novalidate>
+                <!-- Email Input -->
+                <div class="input-group" id="emailGroup">
+                    <label for="email">Gmail Address</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope icon"></i>
+                        <input type="email" id="email" placeholder="e.g. user@gmail.com" required autocomplete="username">
+                    </div>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="input-group" id="passwordGroup">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <input type="password" id="password" placeholder="Enter at least 6 characters" required autocomplete="current-password">
+                        <button type="button" class="toggle-password" id="togglePassword" aria-label="Toggle password visibility">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-actions-row">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="primary-btn" id="submitBtn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loader"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                </button>
+            </form>
+
+            <div class="card-footer">
+                <p>Don't have an account? <a href="#" id="signupLink">Create one</a></p>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SIGN UP CARD -->
+        <!-- ============================================== -->
+        <div class="glass-panel card hide" id="signupCard">
+            <div class="card-header">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <h2>Create Account</h2>
+                <p class="subtitle">Join our premium platform today</p>
+            </div>
+
+            <form id="signupForm" novalidate>
+                <div class="input-group" id="signupEmailGroup">
+                    <label for="signupEmail">Gmail Address</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope icon"></i>
+                        <input type="email" id="signupEmail" placeholder="e.g. user@gmail.com" required autocomplete="username">
+                    </div>
+                    <div class="error-message" id="signupEmailError"></div>
+                </div>
+
+                <div class="input-group" id="signupPasswordGroup">
+                    <label for="signupPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <input type="password" id="signupPassword" placeholder="Minimum 6 characters" required autocomplete="new-password">
+                        <button type="button" class="toggle-password" id="toggleSignupPassword" aria-label="Toggle password visibility">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="signupPasswordError"></div>
+                </div>
+
+                <div class="input-group" id="signupConfirmPasswordGroup">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-shield-check icon"></i>
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required autocomplete="new-password">
+                    </div>
+                    <div class="error-message" id="signupConfirmPasswordError"></div>
+                </div>
+
+                <button type="submit" class="primary-btn" id="signupSubmitBtn">
+                    <span class="btn-text">Register Account</span>
+                    <span class="btn-loader"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                </button>
+            </form>
+
+            <div class="card-footer">
+                <p>Already have an account? <a href="#" id="signinLink">Sign in</a></p>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- OTP VERIFICATION CARD -->
+        <!-- ============================================== -->
+        <div class="glass-panel card hide" id="otpCard">
+            <div class="card-header">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <h2>Verify Email</h2>
+                <p class="subtitle">Enter the 6-digit code sent to your Gmail</p>
+            </div>
+
+            <form id="otpForm" novalidate>
+                <div class="input-group" id="otpGroup">
+                    <div class="otp-inputs-wrapper">
+                        <input type="text" class="otp-input" id="otp1" maxlength="1" required pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                        <input type="text" class="otp-input" id="otp2" maxlength="1" required pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                        <input type="text" class="otp-input" id="otp3" maxlength="1" required pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                        <input type="text" class="otp-input" id="otp4" maxlength="1" required pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                        <input type="text" class="otp-input" id="otp5" maxlength="1" required pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                        <input type="text" class="otp-input" id="otp6" maxlength="1" required pattern="[0-9]" inputmode="numeric" autocomplete="off">
+                    </div>
+                    <div class="error-message" id="otpError"></div>
+                </div>
+
+                <button type="submit" class="primary-btn" id="otpSubmitBtn">
+                    <span class="btn-text">Verify & Complete</span>
+                    <span class="btn-loader"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                </button>
+                
+                <div class="resend-container">
+                    <p>Didn't receive the code? <a href="#" id="resendBtn" class="disabled">Resend (<span id="countdown">60</span>s)</a></p>
+                </div>
+            </form>
+
+            <div class="card-footer">
+                <p><a href="#" id="backToSignupBtn"><i class="fa-solid fa-arrow-left"></i> Back to Sign Up</a></p>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SUCCESS DASHBOARD CARD -->
+        <!-- ============================================== -->
+        <div class="glass-panel card success-card hide" id="successCard">
+            <div class="success-icon-wrapper">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+            </div>
+            <h2>Login Successful!</h2>
+            
+            <div class="user-details">
+                <p id="welcomeUser" class="welcome-text">Welcome back, <strong>user@gmail.com</strong></p>
+                <div class="status-badge">
+                    <span class="dot"></span> Online
+                </div>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Last Login</span>
+                    <strong id="loginTime">Just now</strong>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Security</span>
+                    <strong>Verified</strong>
+                </div>
+            </div>
+
+            <button type="button" class="primary-btn outline-btn" id="logoutBtn">
+                <span class="btn-text">Sign Out</span>
+            </button>
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

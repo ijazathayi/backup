@@ -1,0 +1,564 @@
+<!--// it have both neon and normal version of swinging card 
+// so it will use for normal on light background and neon for dark background -->
+
+<!-- WORKING
+this is the glowing version of swinging card, if you want the normal one just comment the glow part in css and change the background to light color -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neon Rope Card (Fixed)</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1a1a2e, #0f0f0f);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* SYSTEM */
+.hanger-system {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Pivot */
+.pivot-point {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00f0ff;
+    z-index: 3;
+}
+
+/* Rope */
+.rope-svg {
+    position: absolute;
+    top: 86px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: visible;
+    z-index: 1;
+}
+
+.rope-svg path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px #00f0ff);
+}
+
+/* CARD */
+.card {
+    position: absolute;
+    top: 86px;
+    left: 50%;
+    transform: translate(-50%, 120px);
+
+    width: 260px;
+    height: 320px;
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    text-align: center;
+
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.3),
+        0 0 40px rgba(255,0,200,0.2),
+        inset 0 0 20px rgba(255,255,255,0.05);
+
+    z-index: 2;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+h2 {
+    margin: 0;
+    text-shadow: 0 0 10px #00f0ff;
+}
+
+p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hanger-system">
+
+    <div class="pivot-point"></div>
+
+    <svg class="rope-svg" width="400" height="300">
+        <defs>
+            <linearGradient id="ropeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#00f0ff"/>
+                <stop offset="100%" stop-color="#ff00c8"/>
+            </linearGradient>
+        </defs>
+        <path id="ropePath" fill="none" stroke="url(#ropeGradient)" stroke-width="3"/>
+    </svg>
+
+    <div class="card" id="card">
+        <h2>Neon Glass</h2>
+        <p>Drag me 🔥<br>Real rope bend<br>No stretching</p>
+    </div>
+
+</div>
+
+<script>
+const card = document.getElementById('card');
+const rope = document.getElementById('ropePath');
+
+let isDragging = false;
+
+// Rope config
+const SEGMENTS = 20;
+const SEGMENT_LENGTH = 6;
+const GRAVITY = 0.15;
+const DAMPING = 0.995;
+
+let points = [];
+let oldPoints = [];
+
+// init rope
+// for (let i = 0; i <= SEGMENTS; i++) {
+//     let p = { x: 0, y: i * SEGMENT_LENGTH };
+//     points.push({ ...p });
+//     oldPoints.push({ ...p });
+// }
+
+// // ✅ FIX INITIAL POSITION (important)
+// const initialY = 120;
+
+// points[SEGMENTS].y = initialY;
+// oldPoints[SEGMENTS].y = initialY;
+
+const initialY = 120;
+
+// create perfectly straight rope from top to card
+for (let i = 0; i <= SEGMENTS; i++) {
+    let t = i / SEGMENTS;
+
+    let p = {
+        x: 0,
+        y: t * initialY
+    };
+
+    points.push({ ...p });
+    oldPoints.push({ ...p });
+}
+// START
+const startDrag = () => isDragging = true;
+
+// STOP
+const stopDrag = () => isDragging = false;
+
+const handleMove = (e) => {
+    if (!isDragging) return;
+
+    if (e.cancelable) e.preventDefault();
+
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const centerX = window.innerWidth / 2;
+    const topY = 86;
+
+    let dx = x - centerX;
+    let dy = y - topY;
+
+    // 🔒 TOTAL rope length
+    const MAX_LENGTH = SEGMENTS * SEGMENT_LENGTH;
+
+    let dist = Math.sqrt(dx * dx + dy * dy);
+
+    // ✅ CLAMP → no stretching possible
+    if (dist > MAX_LENGTH) {
+        let angle = Math.atan2(dy, dx);
+        dx = Math.cos(angle) * MAX_LENGTH;
+        dy = Math.sin(angle) * MAX_LENGTH;
+    }
+
+    points[SEGMENTS].x = dx;
+    points[SEGMENTS].y = dy;
+};
+// PHYSICS LOOP
+const animate = () => {
+
+    // 🔥 VERLET INTEGRATION (this is the key)
+    for (let i = 1; i <= SEGMENTS; i++) {
+
+        let vx = (points[i].x - oldPoints[i].x) * DAMPING;
+        let vy = (points[i].y - oldPoints[i].y) * DAMPING;
+
+        oldPoints[i].x = points[i].x;
+        oldPoints[i].y = points[i].y;
+
+        if (!isDragging || i !== SEGMENTS) {
+            points[i].x += vx;
+            points[i].y += vy + GRAVITY;
+        }
+    }
+
+    // 🔒 lock top
+    points[0].x = 0;
+    points[0].y = 0;
+
+    // solve constraints multiple times
+
+    for (let k = 0; k < 20; k++) { // 🔥 more iterations = tighter rope
+
+    for (let i = 1; i <= SEGMENTS; i++) {
+
+        let dx = points[i].x - points[i - 1].x;
+        let dy = points[i].y - points[i - 1].y;
+
+        let dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
+
+        // 🎯 FORCE exact length (not approximate)
+        let scale = SEGMENT_LENGTH / dist;
+
+        let midX = (points[i].x + points[i - 1].x) / 2;
+        let midY = (points[i].y + points[i - 1].y) / 2;
+
+        let offsetX = (dx * scale) / 2;
+        let offsetY = (dy * scale) / 2;
+
+        if (i !== 0) {
+            points[i].x = midX + offsetX;
+            points[i].y = midY + offsetY;
+        }
+
+        if (i !== 1) {
+            points[i - 1].x = midX - offsetX;
+            points[i - 1].y = midY - offsetY;
+        }
+    }
+
+    // 🔒 keep top fixed every iteration
+    points[0].x = 0;
+    points[0].y = 0;
+}
+    const end = points[SEGMENTS];
+
+    // move card
+    card.style.transform = `translate(-50%, ${end.y}px) translateX(${end.x}px)`;
+
+    // smooth rope
+    const center = 200;
+    let path = `M ${center} 0`;
+
+    for (let i = 1; i < SEGMENTS; i++) {
+        let xc = (points[i].x + points[i + 1].x) / 2;
+        let yc = (points[i].y + points[i + 1].y) / 2;
+
+        path += ` Q ${center + points[i].x} ${points[i].y} ${center + xc} ${yc}`;
+    }
+
+    path += ` T ${center + end.x} ${end.y}`;
+
+    rope.setAttribute("d", path);
+
+    requestAnimationFrame(animate);
+};
+function drawInitialRope() {
+    const center = 200;
+
+    let path = `M ${center} 0`;
+
+    for (let i = 1; i < SEGMENTS; i++) {
+        let xc = (points[i].x + points[i + 1].x) / 2;
+        let yc = (points[i].y + points[i + 1].y) / 2;
+
+        path += ` Q ${center + points[i].x} ${points[i].y} ${center + xc} ${yc}`;
+    }
+
+    let end = points[SEGMENTS];
+    path += ` T ${center + end.x} ${end.y}`;
+
+    rope.setAttribute("d", path);
+
+    // also place card correctly
+    card.style.transform = `translate(-50%, ${end.y}px) translateX(${end.x}px)`;
+}
+drawInitialRope();
+animate();
+
+// ONLY attach to card
+card.addEventListener('mousedown', startDrag);
+card.addEventListener('touchstart', startDrag, { passive: false });
+
+document.addEventListener('mousemove', handleMove);
+document.addEventListener('mouseup', stopDrag);
+
+document.addEventListener('touchmove', handleMove, { passive: false });
+document.addEventListener('touchend', stopDrag);
+</script>
+
+</body>
+</html> 
+<!--
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexible Rope Swing Card</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #111, #1c1c1c);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* SYSTEM */
+.hanger-system {
+    margin-top: 60px;
+    position: relative;
+    width: 300px;
+    height: 500px;
+}
+
+/* Nail */
+.pivot-point {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #aaa;
+    border-radius: 50%;
+    z-index: 3;
+}
+
+/* Rope */
+.rope-svg {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: visible;
+}
+
+/* Card */
+.card {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translate(-50%, 120px);
+
+    width: 260px;
+    height: 330px;
+    background: #f4f4f4;
+    border-radius: 18px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hanger-system">
+    <div class="pivot-point"></div>
+
+    <svg class="rope-svg" width="300" height="400">
+        <path id="ropePath" stroke="#c9a46c" stroke-width="3" fill="none"/>
+    </svg>
+
+    <div class="card" id="card">
+        <h2>Physics Card</h2>
+        <p>Real rope<br>No stretch<br>Full bend</p>
+    </div>
+</div>
+
+<script>
+const card = document.getElementById('card');
+const rope = document.getElementById('ropePath');
+
+let isDragging = false;
+
+// rope config
+const SEGMENTS = 20;
+const SEGMENT_LENGTH = 6;
+const GRAVITY = 0.15;
+const DAMPING = 0.995;
+
+let points = [];
+let oldPoints = [];
+
+// init
+for (let i = 0; i <= SEGMENTS; i++) {
+    let p = { x: 0, y: i * SEGMENT_LENGTH };
+    points.push({ ...p });
+    oldPoints.push({ ...p });
+}
+
+// START
+card.addEventListener('mousedown', () => isDragging = true);
+card.addEventListener('touchstart', () => isDragging = true);
+
+// STOP
+document.addEventListener('mouseup', () => isDragging = false);
+document.addEventListener('touchend', () => isDragging = false);
+
+// MOVE
+document.addEventListener('mousemove', handleMove);
+document.addEventListener('touchmove', handleMove, { passive: false });
+
+function handleMove(e) {
+    if (!isDragging) return;
+
+    if (e.cancelable) e.preventDefault();
+
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const rect = document.querySelector('.hanger-system').getBoundingClientRect();
+
+    let dx = x - rect.left - rect.width / 2;
+    let dy = y - rect.top - 14;
+
+    // clamp length
+    const maxLen = SEGMENTS * SEGMENT_LENGTH;
+    let dist = Math.sqrt(dx*dx + dy*dy);
+
+    if (dist > maxLen) {
+        let angle = Math.atan2(dy, dx);
+        dx = Math.cos(angle) * maxLen;
+        dy = Math.sin(angle) * maxLen;
+    }
+
+    points[SEGMENTS].x = dx;
+    points[SEGMENTS].y = dy;
+}
+
+// LOOP
+function animate() {
+
+    // verlet
+    for (let i = 1; i <= SEGMENTS; i++) {
+        let vx = (points[i].x - oldPoints[i].x) * DAMPING;
+        let vy = (points[i].y - oldPoints[i].y) * DAMPING;
+
+        oldPoints[i].x = points[i].x;
+        oldPoints[i].y = points[i].y;
+
+        if (!isDragging || i !== SEGMENTS) {
+            points[i].x += vx;
+            points[i].y += vy + GRAVITY;
+        }
+    }
+
+    // fix top
+    points[0].x = 0;
+    points[0].y = 0;
+
+    // constraints
+    for (let k = 0; k < 20; k++) {
+        for (let i = 1; i <= SEGMENTS; i++) {
+
+            let dx = points[i].x - points[i - 1].x;
+            let dy = points[i].y - points[i - 1].y;
+
+            let dist = Math.sqrt(dx*dx + dy*dy) || 0.0001;
+            let scale = SEGMENT_LENGTH / dist;
+
+            let midX = (points[i].x + points[i - 1].x) / 2;
+            let midY = (points[i].y + points[i - 1].y) / 2;
+
+            let offsetX = dx * scale / 2;
+            let offsetY = dy * scale / 2;
+
+            points[i].x = midX + offsetX;
+            points[i].y = midY + offsetY;
+
+            if (i !== 1) {
+                points[i - 1].x = midX - offsetX;
+                points[i - 1].y = midY - offsetY;
+            }
+        }
+
+        points[0].x = 0;
+        points[0].y = 0;
+    }
+
+    const end = points[SEGMENTS];
+
+    // move card
+    card.style.transform = `translate(-50%, ${end.y}px) translateX(${end.x}px)`;
+
+    // draw rope
+    const center = 150;
+    let path = `M ${center} 0`;
+
+    for (let i = 1; i < SEGMENTS; i++) {
+        let xc = (points[i].x + points[i + 1].x) / 2;
+        let yc = (points[i].y + points[i + 1].y) / 2;
+
+        path += ` Q ${center + points[i].x} ${points[i].y} ${center + xc} ${yc}`;
+    }
+
+    path += ` T ${center + end.x} ${end.y}`;
+
+    rope.setAttribute("d", path);
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html> -->

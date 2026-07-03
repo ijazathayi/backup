@@ -1,0 +1,45 @@
+/* Windows 7 Orb Glow Animation */
+.win7-orb {
+  transition: all 0.2s ease-in-out;
+}
+
+.win7-orb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(90, 176, 247, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.6);
+  filter: brightness(1.1);
+}
+
+.win7-orb:active {
+  transform: scale(0.95);
+  filter: brightness(0.9);
+}
+
+/* Desktop Icon Hover Effect */
+.desktop-icon-img {
+  transition: transform 0.1s ease;
+}
+
+.icon-wrapper:hover .desktop-icon-img {
+  transform: scale(1.05);
+}
+
+/* Scrollbar styling for a more native feel */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 6px;
+  border: 3px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+

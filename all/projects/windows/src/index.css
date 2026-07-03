@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap');
+
+:root {
+  --w7-bg: #000;
+  --w7-text: #000;
+  --w7-glass-border: rgba(255, 255, 255, 0.4);
+  --w7-glass-bg: rgba(255, 255, 255, 0.2);
+  --w7-glass-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+  --w7-taskbar-h: 40px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; /* Prevent scrolling on the desktop */
+  user-select: none; /* Make it feel more like an OS */
+  background-color: #000;
+}
+
+/* Background image will be set inline or via specific component */
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glassmorphism Utility */
+.aero-glass {
+  background: var(--w7-glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--w7-glass-border);
+  box-shadow: var(--w7-glass-shadow);
+  border-radius: 8px;
+}

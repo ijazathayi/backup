@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hand Gesture Recognition</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Ambient glow orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="layout">
+
+    <!-- ── HEADER ──────────────────────────────────────── -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">🖐</span>
+          <span class="logo-text">GestureCV</span>
+        </div>
+        <div class="status-pill" id="statusPill">
+          <span class="pulse-dot"></span>
+          <span id="statusText">Connecting…</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── MAIN ─────────────────────────────────────────── -->
+    <main class="main">
+
+      <!-- LEFT: camera feed -->
+      <section class="camera-panel">
+        <div class="camera-frame">
+          <div class="camera-corner tl"></div>
+          <div class="camera-corner tr"></div>
+          <div class="camera-corner bl"></div>
+          <div class="camera-corner br"></div>
+          <img id="videoFeed" src="/video_feed" alt="Camera feed"/>
+          <div class="scan-line"></div>
+        </div>
+        <div class="camera-meta">
+          <span class="meta-item">
+            <span class="meta-label">FRAME</span>
+            <span class="meta-val" id="frameCount">0</span>
+          </span>
+          <span class="meta-divider">|</span>
+          <span class="meta-item">
+            <span class="meta-label">SOURCE</span>
+            <span class="meta-val">CAM 0</span>
+          </span>
+          <span class="meta-divider">|</span>
+          <span class="meta-item">
+            <span class="meta-label">MODEL</span>
+            <span class="meta-val">MediaPipe</span>
+          </span>
+        </div>
+      </section>
+
+      <!-- RIGHT: info panel -->
+      <aside class="info-panel">
+
+        <!-- Gesture card -->
+        <div class="card gesture-card">
+          <p class="card-eyebrow">DETECTED GESTURE</p>
+          <div class="gesture-emoji" id="gestureEmoji">🤷</div>
+          <div class="gesture-name" id="gestureName">Waiting…</div>
+          <div class="confidence-bar-wrap">
+            <div class="confidence-bar" id="confidenceBar"></div>
+          </div>
+          <p class="confidence-label" id="confidenceLabel">Confidence — 0%</p>
+        </div>
+
+        <!-- Finger states -->
+        <div class="card fingers-card">
+          <p class="card-eyebrow">FINGER STATES</p>
+          <div class="fingers-grid">
+            <div class="finger-item" id="f-thumb">
+              <div class="finger-icon">👍</div>
+              <div class="finger-label">Thumb</div>
+              <div class="finger-badge" id="b-thumb">—</div>
+            </div>
+            <div class="finger-item" id="f-index">
+              <div class="finger-icon">☝</div>
+              <div class="finger-label">Index</div>
+              <div class="finger-badge" id="b-index">—</div>
+            </div>
+            <div class="finger-item" id="f-middle">
+              <div class="finger-icon">🖕</div>
+              <div class="finger-label">Middle</div>
+              <div class="finger-badge" id="b-middle">—</div>
+            </div>
+            <div class="finger-item" id="f-ring">
+              <div class="finger-icon">💍</div>
+              <div class="finger-label">Ring</div>
+              <div class="finger-badge" id="b-ring">—</div>
+            </div>
+            <div class="finger-item" id="f-pinky">
+              <div class="finger-icon">🤙</div>
+              <div class="finger-label">Pinky</div>
+              <div class="finger-badge" id="b-pinky">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- History -->
+        <div class="card history-card">
+          <p class="card-eyebrow">RECENT GESTURES</p>
+          <ul class="history-list" id="historyList">
+            <li class="history-empty">No gestures yet…</li>
+          </ul>
+        </div>
+
+      </aside>
+    </main>
+
+    <!-- ── GESTURE GLOSSARY ─────────────────────────────── -->
+    <section class="glossary">
+      <p class="card-eyebrow" style="margin-bottom:16px">GESTURE GLOSSARY</p>
+      <div class="glossary-grid">
+        <div class="glyph-card">✊<span>Fist</span></div>
+        <div class="glyph-card">🖐<span>Open Hand</span></div>
+        <div class="glyph-card">☝<span>Pointing</span></div>
+        <div class="glyph-card">✌<span>Peace</span></div>
+        <div class="glyph-card">👍<span>Thumbs Up</span></div>
+        <div class="glyph-card">👌<span>OK</span></div>
+        <div class="glyph-card">🤙<span>Hang Loose</span></div>
+        <div class="glyph-card">🤘<span>Rock Sign</span></div>
+        <div class="glyph-card">🤟<span>Rock On</span></div>
+        <div class="glyph-card">🔫<span>Gun</span></div>
+        <div class="glyph-card">🤌<span>Pinch</span></div>
+        <div class="glyph-card">🤷<span>Unknown</span></div>
+      </div>
+    </section>
+
+  </div><!-- /.layout -->
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

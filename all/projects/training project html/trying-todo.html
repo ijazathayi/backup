@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #sect1 {
+            width: 40%;
+        }
+
+
+
+        .container {
+            background: #2B135F;
+            padding: 25px;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        #info-span {
+            margin-top: 10px;
+            font-size: 0.7em;
+            color: red;
+        }
+
+        #setup-step {
+            padding-bottom: 20px;
+            background-color: white;
+            border-radius: 18px;
+            height: 20vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #setup-step h3 {
+            color: #2B135F;
+            font-size: 2em;
+        }
+
+        #setup-step button {
+            margin-top: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        #sect2 {
+            width: 58%;
+            height: 100%;
+            margin-left: 2%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #app-step {
+            width: 100%;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 18px;
+            height: 67vh;
+
+        }
+
+        #search-div {
+            display: flex;
+            gap: 10px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #search-div input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        #search-div button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+        }
+
+        #project-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        .project-chip {
+            background: #e1e4e8;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            width: 50%;
+            font-size: 20px;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+        }
+
+
+
+        .hidden {
+            display: none;
+        }
+
+
+        #sect2 #editor-step {
+            padding: 30px;
+            background-color: white;
+            border-radius: 18px;
+            height: 90vh;
+            width: 100%;
+        }
+
+        #project-list-div {
+            margin-top: 20px;
+        }
+
+        #editor-step h2 {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #editor-step input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        #editor-step button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+        }
+
+        #editor-step ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        #editor-step li {
+            background: #fff;
+            border: 1px solid #eee;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .del-btn {
+            color: #ff4d4d;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+
+        .project-chip {
+            position: relative;
+            justify-content: space-between;
+            /* Align text and delete button */
+            padding-right: 35px;
+            /* Space for the X button */
+        }
+
+        .del-project {
+            position: absolute;
+            right: 10px;
+            color: #ff4d4d;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .del-project:hover {
+            color: #cc0000;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <section id="sect1">
+
+
+            <div id="setup-step" class="section">
+                <h3>Storage Folder</h3>
+                <button onclick="initFolder()">Connect to Local Folder</button>
+                <span id="info-span">* Don't forget this saved folder!</span>
+            </div>
+
+            <div id="app-step" class="section hidden">
+                <div style="margin-top:15px;" id="search-div">
+                    <input type="text" id="new-heading" placeholder="New Project Name...">
+                    <button onclick="openProject()">Create/Open</button>
+                </div>
+                <div id="project-list-div">
+                    <h3> Your Projects</h3>
+                    <div id="project-gallery" class="project-list">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sect2">
+
+            <div id="editor-step" class="section hidden">
+                <h2 id="active-project-title">Project</h2>
+                <div style="display:flex; gap:5px;">
+                    <input type="text" id="todo-input" placeholder="What needs doing?">
+                    <button onclick="addTask()">Add</button>
+                </div>
+                <ul id="todo-list"></ul>
+            </div>
+
+        </section>
+    </div>
+
+
+
+
+
+
+    <script>
+        let directoryHandle;
+        let currentFileHandle;
+        let tasks = [];
+
+        // Initialize Folder Access
+        async function initFolder() {
+            try {
+                directoryHandle = await window.showDirectoryPicker();
+                document.getElementById('setup-step').classList.add('hidden');
+                document.getElementById('app-step').classList.remove('hidden');
+                listAllProjects(); // Scan folder immediately
+            } catch (err) {
+                console.error("User cancelled folder picker");
+            }
+        }
+
+        async function listAllProjects() {
+            const gallery = document.getElementById('project-gallery');
+            gallery.innerHTML = '';
+
+            for await (const entry of directoryHandle.values()) {
+                if (entry.kind === 'file' && entry.name.endsWith('.txt')) {
+                    const container = document.createElement('div');
+                    container.className = 'project-chip';
+
+                    const displayName = entry.name.replace('.txt', '');
+
+                    // Name label
+                    const nameSpan = document.createElement('span');
+                    nameSpan.innerText = displayName;
+                    nameSpan.style.cursor = 'pointer';
+                    nameSpan.onclick = () => {
+                        document.getElementById('new-heading').value = displayName;
+                        openProject();
+                    };
+
+                    // Delete button (X)
+                    const delBtn = document.createElement('span');
+                    delBtn.className = 'del-project';
+                    delBtn.innerHTML = '🚮';
+                    delBtn.onclick = (e) => {
+                        e.stopPropagation(); // Prevent opening the project when clicking delete
+                        deleteProjectFile(entry.name);
+                    };
+
+                    container.appendChild(nameSpan);
+                    container.appendChild(delBtn);
+                    gallery.appendChild(container);
+                }
+            }
+
+            if (gallery.innerHTML === '') {
+                gallery.innerHTML = '<small style="color:gray">No projects found in this folder.</small>';
+            }
+        }
+
+
+
+        async function deleteProjectFile(fileName) {
+            if (!confirm(`Are you sure you want to delete "${fileName.replace('.txt', '')}"?`)) return;
+
+            try {
+                // Use removeEntry to delete the file from the local directory
+                await directoryHandle.removeEntry(fileName);
+
+                // If the deleted project was open in the editor, hide the editor
+                const activeTitle = document.getElementById('active-project-title').innerText.toLowerCase();
+                if (activeTitle === fileName.replace('.txt', '').toLowerCase()) {
+                    document.getElementById('editor-step').classList.add('hidden');
+                }
+
+                // Refresh the list
+                listAllProjects();
+            } catch (err) {
+                console.error("Error deleting file:", err);
+                alert("Could not delete file. Make sure you have the correct permissions.");
+            }
+        }
+
+
+
+
+
+
+        // OPEN OR CREATE PROJECT
+        async function openProject() {
+            const heading = document.getElementById('new-heading').value.trim();
+            if (!heading) return;
+
+            const fileName = `${heading}.txt`;
+            try {
+                currentFileHandle = await directoryHandle.getFileHandle(fileName, { create: true });
+                document.getElementById('active-project-title').innerText = heading.toUpperCase();
+                document.getElementById('editor-step').classList.remove('hidden');
+
+                // Refresh list in case a new file was created
+                listAllProjects();
+
+                // Load Content
+                const file = await currentFileHandle.getFile();
+                const text = await file.text();
+                tasks = text ? text.split('\n').filter(t => t.trim() !== "") : [];
+                renderTasks();
+            } catch (err) {
+                alert("Error accessing file.");
+            }
+        }
+
+        // ADD TASK
+        async function addTask() {
+            const input = document.getElementById('todo-input');
+            if (!input.value.trim()) return;
+
+            tasks.push(input.value);
+            input.value = '';
+            await saveToDevice();
+            renderTasks();
+        }
+
+        // DELETE TASK
+        async function deleteTask(index) {
+            tasks.splice(index, 1);
+            await saveToDevice();
+            renderTasks();
+        }
+
+        // SAVE LOGIC
+        async function saveToDevice() {
+            const writable = await currentFileHandle.createWritable();
+            await writable.write(tasks.join('\n'));
+            await writable.close();
+        }
+
+        // UI RENDER
+        function renderTasks() {
+            const list = document.getElementById('todo-list');
+            list.innerHTML = tasks.map((t, i) => `
+            <li>
+                <span>${t}</span>
+                <span class="del-btn" onclick="deleteTask(${i})">✕</span>
+            </li>
+        `).join('');
+        }
+    </script>
+
+</body>
+
+</html>

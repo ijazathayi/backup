@@ -1,0 +1,114 @@
+@import '../css/style.css';
+
+.nav-brand {
+  color: inherit;
+}
+
+.brand-icon,
+.feature-icon,
+.quiz-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(108,99,255,0.14);
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.nav-link {
+  appearance: none;
+}
+
+.react-chart {
+  width: 280px;
+  height: 320px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: end;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+    rgba(255,255,255,0.03);
+  background-size: 100% 48px, 48px 100%, 100% 100%;
+}
+
+.react-chart span {
+  position: relative;
+  height: var(--h);
+  min-height: 56px;
+  border-radius: 4px;
+  animation: candleRise 0.7s ease both;
+  animation-delay: var(--delay);
+}
+
+.react-chart span::before,
+.react-chart span::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 3px;
+  transform: translateX(-50%);
+  background: currentColor;
+  border-radius: 99px;
+}
+
+.react-chart span::before {
+  top: -28px;
+  height: 34px;
+}
+
+.react-chart span::after {
+  bottom: -24px;
+  height: 30px;
+}
+
+.react-chart .up {
+  color: var(--success);
+  background: var(--success);
+}
+
+.react-chart .down {
+  color: var(--danger);
+  background: var(--danger);
+}
+
+.topic-card,
+.candle-card,
+.feature-card {
+  color: inherit;
+  text-align: left;
+}
+
+.feature-card .feature-icon {
+  margin-bottom: 16px;
+}
+
+.search-icon {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+@keyframes candleRise {
+  from {
+    opacity: 0;
+    transform: scaleY(0.6) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-hamburger {
+    font-size: 0.8rem;
+  }
+}

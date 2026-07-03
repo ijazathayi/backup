@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File-System Project Manager</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 40px; }
+        .container { background: #fff; padding: 25px; border-radius: 12px; width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        .section { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .hidden { display: none; }
+        
+        /* Project List Styling */
+        .project-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .project-chip { 
+            background: #e1e4e8; padding: 6px 12px; border-radius: 20px; 
+            cursor: pointer; font-size: 0.9rem; transition: 0.2s; 
+        }
+        .project-chip:hover { background: #007bff; color: white; }
+
+        input { width: 70%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+        button { padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; background: #007bff; color: white; }
+        
+        ul { list-style: none; padding: 0; }
+        li { 
+            background: #fff; border: 1px solid #eee; margin-bottom: 8px;
+            padding: 10px; border-radius: 8px; display: flex; justify-content: space-between; 
+        }
+        .del-btn { color: #ff4d4d; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="setup-step" class="section">
+        <h3>Step 1: Storage Folder</h3>
+        <button onclick="initFolder()">Connect to Local Folder</button>
+    </div>
+
+    <div id="app-step" class="section hidden">
+        <h3>Step 2: Your Projects</h3>
+        <div id="project-gallery" class="project-list">
+            </div>
+        
+        <div style="margin-top:15px;">
+            <input type="text" id="new-heading" placeholder="New Project Name...">
+            <button onclick="openProject()">Create/Open</button>
+        </div>
+    </div>
+
+    <div id="editor-step" class="section hidden">
+        <h2 id="active-project-title">Project</h2>
+        <div style="display:flex; gap:5px;">
+            <input type="text" id="todo-input" placeholder="What needs doing?">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="todo-list"></ul>
+    </div>
+</div>
+
+<script>
+    let directoryHandle;
+    let currentFileHandle;
+    let tasks = [];
+
+    // Initialize Folder Access
+    async function initFolder() {
+        try {
+            directoryHandle = await window.showDirectoryPicker();
+            document.getElementById('setup-step').classList.add('hidden');
+            document.getElementById('app-step').classList.remove('hidden');
+            listAllProjects(); // Scan folder immediately
+        } catch (err) {
+            console.error("User cancelled folder picker");
+        }
+    }
+
+    // LIST ALL HEADINGS (Files in folder)
+    async function listAllProjects() {
+        const gallery = document.getElementById('project-gallery');
+        gallery.innerHTML = ''; // Clear current list
+
+        // Loop through all files in the directory
+        for await (const entry of directoryHandle.values()) {
+            if (entry.kind === 'file' && entry.name.endsWith('.txt')) {
+                const btn = document.createElement('div');
+                btn.className = 'project-chip';
+                // Display name without the .txt extension
+                const displayName = entry.name.replace('.txt', '');
+                btn.innerText = displayName;
+                btn.onclick = () => {
+                    document.getElementById('new-heading').value = displayName;
+                    openProject();
+                };
+                gallery.appendChild(btn);
+            }
+        }
+        
+        if (gallery.innerHTML === '') {
+            gallery.innerHTML = '<small style="color:gray">No projects found in this folder.</small>';
+        }
+    }
+
+    // OPEN OR CREATE PROJECT
+    async function openProject() {
+        const heading = document.getElementById('new-heading').value.trim();
+        if (!heading) return;
+
+        const fileName = `${heading}.txt`;
+        try {
+            currentFileHandle = await directoryHandle.getFileHandle(fileName, { create: true });
+            document.getElementById('active-project-title').innerText = heading.toUpperCase();
+            document.getElementById('editor-step').classList.remove('hidden');
+
+            // Refresh list in case a new file was created
+            listAllProjects();
+
+            // Load Content
+            const file = await currentFileHandle.getFile();
+            const text = await file.text();
+            tasks = text ? text.split('\n').filter(t => t.trim() !== "") : [];
+            renderTasks();
+        } catch (err) {
+            alert("Error accessing file.");
+        }
+    }
+
+    // ADD TASK
+    async function addTask() {
+        const input = document.getElementById('todo-input');
+        if (!input.value.trim()) return;
+
+        tasks.push(input.value);
+        input.value = '';
+        await saveToDevice();
+        renderTasks();
+    }
+
+    // DELETE TASK
+    async function deleteTask(index) {
+        tasks.splice(index, 1);
+        await saveToDevice();
+        renderTasks();
+    }
+
+    // SAVE LOGIC
+    async function saveToDevice() {
+        const writable = await currentFileHandle.createWritable();
+        await writable.write(tasks.join('\n'));
+        await writable.close();
+    }
+
+    // UI RENDER
+    function renderTasks() {
+        const list = document.getElementById('todo-list');
+        list.innerHTML = tasks.map((t, i) => `
+            <li>
+                <span>${t}</span>
+                <span class="del-btn" onclick="deleteTask(${i})">✕</span>
+            </li>
+        `).join('');
+    }
+</script>
+
+</body>
+</html>

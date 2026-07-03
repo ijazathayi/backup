@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Price Prediction — Linear Regression</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="36" height="36" rx="10" fill="#10b981" fill-opacity="0.15"/>
+          <polyline points="5,26 10,20 15,22 20,12 25,15 31,7" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="31" cy="7" r="2.5" fill="#10b981"/>
+          <line x1="5" y1="29" x2="31" y2="29" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+        <div>
+          <h1 class="title-gradient">Stock Price Prediction</h1>
+          <p class="subtitle">Linear Regression · Moving Average · Momentum</p>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span class="badge-dot"></span>
+        <span>Live Simulation</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- ===== MARKET OVERVIEW ===== -->
+    <section class="section">
+      <h2 class="section-title">Market Overview</h2>
+      <div class="market-grid" id="marketGrid"></div>
+    </section>
+
+    <!-- ===== PREDICTION PANEL ===== -->
+    <section class="section">
+      <h2 class="section-title">Price Prediction</h2>
+      <div class="panel-grid">
+
+        <!-- Controls -->
+        <div class="card controls-card">
+          <h3 class="card-title">Settings</h3>
+
+          <div class="form-group">
+            <label class="form-label">Select Stock</label>
+            <div class="select-wrapper">
+              <select id="stockSelect" class="form-select">
+                <option value="AAPL">AAPL — Apple Inc.</option>
+                <option value="GOOGL">GOOGL — Alphabet Inc.</option>
+                <option value="MSFT">MSFT — Microsoft Corp.</option>
+                <option value="AMZN">AMZN — Amazon.com Inc.</option>
+                <option value="TSLA">TSLA — Tesla Inc.</option>
+                <option value="META">META — Meta Platforms</option>
+                <option value="NVDA">NVDA — NVIDIA Corp.</option>
+                <option value="NFLX">NFLX — Netflix Inc.</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Days to Predict</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="days" value="1" /> 1 Day</label>
+              <label class="radio-label"><input type="radio" name="days" value="5" checked /> 5 Days</label>
+              <label class="radio-label"><input type="radio" name="days" value="10" /> 10 Days</label>
+              <label class="radio-label"><input type="radio" name="days" value="30" /> 30 Days</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Prediction Model</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="model" value="linear" checked /> Linear Regression</label>
+              <label class="radio-label"><input type="radio" name="model" value="moving" /> Moving Average</label>
+              <label class="radio-label"><input type="radio" name="model" value="momentum" /> Momentum</label>
+            </div>
+          </div>
+
+          <button id="predictBtn" class="predict-btn">
+            <svg viewBox="0 0 20 20" fill="none" class="btn-icon"><path d="M10 2v16M2 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/></svg>
+            Run Prediction
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div class="card results-card" id="resultsCard">
+          <h3 class="card-title" id="resultsTitle">Results</h3>
+          <div id="resultsContent" class="results-placeholder">
+            <svg viewBox="0 0 64 64" fill="none" class="placeholder-icon">
+              <circle cx="32" cy="32" r="28" stroke="#10b981" stroke-width="2" opacity="0.3"/>
+              <polyline points="16,40 24,28 32,34 40,20 48,24" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.5"/>
+            </svg>
+            <p>Configure settings and click <strong>Run Prediction</strong> to see results</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== CHART ===== -->
+    <section class="section" id="chartSection">
+      <div class="card chart-card">
+        <div class="chart-header">
+          <div>
+            <h3 class="card-title" id="chartTitle">Historical + Predicted Prices</h3>
+            <p class="chart-sub" id="chartSub">Select a stock and run prediction to view chart</p>
+          </div>
+          <div class="chart-legend" id="chartLegend"></div>
+        </div>
+        <div class="chart-container">
+          <svg id="mainChart" class="main-chart" viewBox="0 0 900 320" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="chart-x-labels" id="chartXLabels"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>⚠️ This is a simulation for educational purposes only. Not financial advice.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

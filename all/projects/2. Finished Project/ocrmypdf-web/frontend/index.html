@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Word OCR Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    
+    <main class="container">
+        <header>
+            <h1><i class="fa-solid fa-file-pdf"></i> OCRmyPDF WebApp</h1>
+            <p>Convert your scanned PDFs to fully searchable Word Documents effortlessly.</p>
+        </header>
+
+        <section class="upload-section">
+            <div id="drop-area" class="drop-area">
+                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                <h2>Drag & Drop your PDF here</h2>
+                <p>or</p>
+                <input type="file" id="fileElem" accept="application/pdf" hidden>
+                <label class="btn-primary" for="fileElem">Browse Files</label>
+            </div>
+            
+            <div id="file-info" class="file-info hidden">
+                <i class="fa-solid fa-file-lines file-icon"></i>
+                <div class="file-details">
+                    <span id="file-name" class="file-name">filename.pdf</span>
+                    <span id="file-size" class="file-size">0 MB</span>
+                </div>
+                <button id="remove-btn" class="btn-icon"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="format-selection">
+                <label>Output Format:</label>
+                <div class="radio-group">
+                    <input type="radio" id="format-docx" name="output_format" value="docx" checked>
+                    <label for="format-docx" class="radio-label">
+                        <i class="fa-solid fa-file-word"></i> Word (.docx)
+                    </label>
+                    <input type="radio" id="format-pdf" name="output_format" value="pdf">
+                    <label for="format-pdf" class="radio-label">
+                        <i class="fa-solid fa-file-pdf"></i> Searchable PDF
+                    </label>
+                </div>
+            </div>
+
+            <button id="process-btn" class="btn-primary btn-large disabled" disabled>Process Document</button>
+            
+            <div id="progress-container" class="progress-container hidden">
+                <div class="progress-bar">
+                    <div id="progress" class="progress"></div>
+                </div>
+                <p id="status-text" class="status-text">Uploading and Processing...</p>
+                <p class="status-subtext">This might take a few minutes depending on the file size.</p>
+            </div>
+            
+            <div id="error-message" class="error-message hidden">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="error-text">An error occurred.</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+node manage_users.js --remove-all
+
+node manage_users.js --remove-user "+91 9999999999"

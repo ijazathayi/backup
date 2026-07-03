@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Translator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">Lingua<span>Shift</span></h1>
+            <p class="subtitle">AI-Powered Global Communication</p>
+        </header>
+
+        <main class="translator-card">
+            <div class="text-areas">
+                <div class="input-section">
+                    <div class="lang-controls">
+                        <select id="from-lang"></select>
+                        <div class="action-buttons">
+                            <button class="icon-btn" id="btn-speak-from" title="Speak Input">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+                            <button class="icon-btn mic-btn" id="btn-mic" title="Voice Input">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                            </button>
+                            <button class="icon-btn" id="btn-copy-from" title="Copy Text">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="from-text" placeholder="Enter text to translate..." spellcheck="false"></textarea>
+                    <div class="char-count" id="from-char">0 / 500</div>
+                </div>
+
+                <div class="exchange-controls">
+                    <button id="exchange-btn" class="exchange-btn" title="Swap Languages">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="14" x2="21" y2="3"></line><polyline points="8 21 3 21 3 16"></polyline><line x1="20" y1="10" x2="3" y2="21"></line></svg>
+                    </button>
+                </div>
+
+                <div class="output-section">
+                    <div class="lang-controls">
+                        <select id="to-lang"></select>
+                        <div class="action-buttons">
+                            <button class="icon-btn auto-speak-btn" id="btn-auto-speak" title="Auto-Speak Translation (Off)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                            </button>
+                            <button class="icon-btn" id="btn-copy-to" title="Copy Translation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
+                            <button class="icon-btn speak-out-btn" id="btn-speak" title="Speak Translation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="to-text" placeholder="Translation will appear here..." readonly spellcheck="false"></textarea>
+                    <div class="speaking-wave" id="speaking-wave">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="char-count" id="to-char" style="visibility: hidden;">0 / 500</div>
+                </div>
+            </div>
+
+            <button class="translate-btn" id="translate-btn">
+                <span>Translate Now</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </main>
+    </div>
+
+    <script src="countries.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+VerbosityLevel: { ERRORS: 0, WARNINGS: 1, INFOS: 5 }
+Parser created: object
+Parser methods: [
+  'constructor',     'destroy',
+  'getInfo',         'getPageLinks',
+  'getText',         'load',
+  'shouldParse',     'getPageText',
+  'getHyperlinks',   'getImage',
+  'convertToRGBA',   'resolveEmbeddedImage',
+  'getScreenshot',   'getTable',
+  'getPathGeometry', 'getPageTables',
+  'fillPageTables'
+]

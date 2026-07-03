@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Recommendation System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="container">
+    <header class="header">
+      <div class="logo-wrap">
+        <div class="logo-icon">🎬</div>
+        <div>
+          <h1 class="title">Movie Recommendation System</h1>
+          <p class="subtitle">AI-powered collaborative filtering — discover your next favourite film</p>
+        </div>
+      </div>
+      <div class="header-badge"><span class="badge-dot"></span>Collaborative Filtering</div>
+    </header>
+
+    <div class="main-grid">
+      <!-- Left panel: preferences -->
+      <div class="sidebar">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🎭</span>
+            <h2>Genre Preferences</h2>
+          </div>
+          <p class="card-desc">Select the genres you love</p>
+          <div class="genre-grid" id="genreGrid"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">⭐</span>
+            <h2>Rate These Movies</h2>
+          </div>
+          <p class="card-desc">Your ratings train the recommendation engine</p>
+          <div class="rating-list" id="ratingList"></div>
+        </div>
+
+        <button class="recommend-btn" id="recommendBtn">
+          <span>✨</span> Get Recommendations
+        </button>
+      </div>
+
+      <!-- Right panel: results -->
+      <div class="results-panel">
+        <div class="results-header">
+          <h2>Recommended For You</h2>
+          <div class="filter-row" id="filterRow"></div>
+        </div>
+        <div class="movies-grid" id="moviesGrid">
+          <div class="empty-state">
+            <div class="empty-icon">🍿</div>
+            <p>Set your preferences and click <strong>Get Recommendations</strong> to discover movies tailored for you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

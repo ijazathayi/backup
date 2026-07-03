@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart Email Sorter – AI-powered email categorizer. Connect your Gmail and instantly sort emails into Work, Personal, Promotions, Finance, Social and more." />
+  <title>Smart Email Sorter – AI Email Organizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="ambient" aria-hidden="true">
+    <div class="amb-blob amb-1"></div>
+    <div class="amb-blob amb-2"></div>
+    <div class="amb-blob amb-3"></div>
+    <div class="amb-blob amb-4"></div>
+  </div>
+  <canvas id="gridCanvas" aria-hidden="true"></canvas>
+
+  <!-- ═══ LOGIN SCREEN ═══ -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-logo-wrap">
+        <img src="logo.png" alt="SortMail" class="login-logo" />
+        <div class="login-brand">
+          <span class="login-name">SortMail</span>
+          <span class="login-sub">Smart Email Sorter</span>
+        </div>
+      </div>
+      <h1 class="login-title">Welcome to Smart Email Sorter</h1>
+      <p class="login-desc">Connect your Gmail account to automatically sort and classify your emails using AI-powered intelligence.</p>
+      
+      <div class="login-features">
+        <div class="login-feature">
+          <span class="lf-icon">🔒</span>
+          <div class="lf-text">
+            <strong>Secure & Private</strong>
+            <span>Read-only access, nothing is stored on servers</span>
+          </div>
+        </div>
+        <div class="login-feature">
+          <span class="lf-icon">⚡</span>
+          <div class="lf-text">
+            <strong>Instant Classification</strong>
+            <span>AI sorts emails into 9 smart categories</span>
+          </div>
+        </div>
+        <div class="login-feature">
+          <span class="lf-icon">🌐</span>
+          <div class="lf-text">
+            <strong>Live Gmail Sync</strong>
+            <span>Fetch real emails directly from your inbox</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="gmail-login-btn" id="gmailLoginBtn" onclick="handleGmailLogin()">
+        <svg width="20" height="20" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span>Sign in with Google</span>
+      </button>
+
+      <button class="demo-mode-btn" onclick="enterDemoMode()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Try Demo Mode (No Login)
+      </button>
+
+      <p class="login-disclaimer">By signing in, you grant read-only access to your Gmail. We never store, share, or modify your emails.</p>
+    </div>
+  </div>
+
+  <!-- ═══ APP SHELL ═══ -->
+  <div class="app-shell hidden" id="appShell">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <img src="logo.png" alt="SortMail" class="sb-logo" />
+        <div class="sb-brand">
+          <span class="sb-name">SortMail</span>
+          <span class="sb-sub">Smart Sorter</span>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+
+      <!-- User Profile (shown when logged in with Gmail) -->
+      <div class="user-profile hidden" id="userProfile">
+        <img class="user-avatar" id="userAvatar" src="" alt="User" />
+        <div class="user-info">
+          <span class="user-name" id="userName">User</span>
+          <span class="user-email" id="userEmail">user@gmail.com</span>
+        </div>
+        <button class="user-logout-btn" onclick="handleLogout()" title="Sign Out">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+
+      <button class="compose-btn" onclick="openCompose()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Sort New Email
+      </button>
+
+      <nav class="sb-nav">
+        <div class="sb-nav-label">Folders</div>
+        <button class="sb-item active" id="nav-all" onclick="filterCategory('all')">
+          <span class="sb-item-icon">📬</span>
+          <span class="sb-item-label">All Emails</span>
+          <span class="sb-badge" id="badge-all">0</span>
+        </button>
+        <button class="sb-item" id="nav-work" onclick="filterCategory('work')">
+          <span class="sb-item-icon">💼</span>
+          <span class="sb-item-label">Work</span>
+          <span class="sb-badge sb-badge-work" id="badge-work">0</span>
+        </button>
+        <button class="sb-item" id="nav-personal" onclick="filterCategory('personal')">
+          <span class="sb-item-icon">👤</span>
+          <span class="sb-item-label">Personal</span>
+          <span class="sb-badge sb-badge-personal" id="badge-personal">0</span>
+        </button>
+        <button class="sb-item" id="nav-promotions" onclick="filterCategory('promotions')">
+          <span class="sb-item-icon">🏷️</span>
+          <span class="sb-item-label">Promotions</span>
+          <span class="sb-badge sb-badge-promotions" id="badge-promotions">0</span>
+        </button>
+        <button class="sb-item" id="nav-social" onclick="filterCategory('social')">
+          <span class="sb-item-icon">🌐</span>
+          <span class="sb-item-label">Social</span>
+          <span class="sb-badge sb-badge-social" id="badge-social">0</span>
+        </button>
+        <button class="sb-item" id="nav-finance" onclick="filterCategory('finance')">
+          <span class="sb-item-icon">💳</span>
+          <span class="sb-item-label">Finance</span>
+          <span class="sb-badge sb-badge-finance" id="badge-finance">0</span>
+        </button>
+        <button class="sb-item" id="nav-newsletter" onclick="filterCategory('newsletter')">
+          <span class="sb-item-icon">📰</span>
+          <span class="sb-item-label">Newsletter</span>
+          <span class="sb-badge sb-badge-newsletter" id="badge-newsletter">0</span>
+        </button>
+        <button class="sb-item" id="nav-travel" onclick="filterCategory('travel')">
+          <span class="sb-item-icon">✈️</span>
+          <span class="sb-item-label">Travel</span>
+          <span class="sb-badge sb-badge-travel" id="badge-travel">0</span>
+        </button>
+        <button class="sb-item" id="nav-updates" onclick="filterCategory('updates')">
+          <span class="sb-item-icon">🔔</span>
+          <span class="sb-item-label">Updates</span>
+          <span class="sb-badge sb-badge-updates" id="badge-updates">0</span>
+        </button>
+        <button class="sb-item" id="nav-spam" onclick="filterCategory('spam')">
+          <span class="sb-item-icon">🚫</span>
+          <span class="sb-item-label">Spam</span>
+          <span class="sb-badge sb-badge-spam" id="badge-spam">0</span>
+        </button>
+      </nav>
+
+      <div class="sb-footer">
+        <div class="storage-bar-wrap">
+          <div class="storage-label">
+            <span>Emails Loaded</span>
+            <span id="storageUsed">0 emails</span>
+          </div>
+          <div class="storage-track">
+            <div class="storage-fill" id="storageFill"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main Panel ── -->
+    <div class="main-panel">
+
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mob-menu-btn" onclick="toggleSidebar()" aria-label="Menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          </button>
+          <div class="search-wrap">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search emails…" oninput="searchEmails()" />
+            <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="Clear search">✕</button>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <!-- Gmail Fetch Controls -->
+          <button class="topbar-btn gmail-btn" id="fetchGmailBtn" onclick="fetchGmailEmails()" title="Fetch Gmail Emails" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+            <span id="fetchBtnText">Fetch Emails</span>
+          </button>
+          <div class="fetch-count-wrap hidden" id="fetchCountWrap">
+            <label class="fetch-label" for="fetchCount">Fetch:</label>
+            <select class="fetch-select" id="fetchCount">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewList" onclick="setView('list')" title="List view">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            </button>
+            <button class="view-btn" id="viewGrid" onclick="setView('grid')" title="Grid view">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </button>
+          </div>
+          <button class="topbar-btn" onclick="sortEmails()" id="sortBtn" title="Sort">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+            Sort
+          </button>
+          <button class="topbar-btn danger-btn" onclick="clearAll()" title="Clear All">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+            Clear
+          </button>
+        </div>
+      </header>
+
+      <!-- Email List -->
+      <div class="content-area" id="contentArea">
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay hidden" id="loadingOverlay">
+          <div class="loading-spinner"></div>
+          <p class="loading-text" id="loadingText">Fetching your emails...</p>
+          <div class="loading-progress">
+            <div class="loading-progress-fill" id="loadingProgress"></div>
+          </div>
+          <p class="loading-sub" id="loadingSub">Please wait while we connect to Gmail</p>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar" id="statsBar">
+          <div class="stat-pill" style="--c:#6366f1">
+            <span class="sp-icon">📬</span>
+            <span class="sp-num" id="stat-total">0</span>
+            <span class="sp-lbl">Total</span>
+          </div>
+          <div class="stat-pill" style="--c:#3b82f6">
+            <span class="sp-icon">💼</span>
+            <span class="sp-num" id="stat-work">0</span>
+            <span class="sp-lbl">Work</span>
+          </div>
+          <div class="stat-pill" style="--c:#10b981">
+            <span class="sp-icon">👤</span>
+            <span class="sp-num" id="stat-personal">0</span>
+            <span class="sp-lbl">Personal</span>
+          </div>
+          <div class="stat-pill" style="--c:#f59e0b">
+            <span class="sp-icon">🏷️</span>
+            <span class="sp-num" id="stat-promo">0</span>
+            <span class="sp-lbl">Promo</span>
+          </div>
+          <div class="stat-pill" style="--c:#ec4899">
+            <span class="sp-icon">🌐</span>
+            <span class="sp-num" id="stat-social">0</span>
+            <span class="sp-lbl">Social</span>
+          </div>
+          <div class="stat-pill" style="--c:#f43f5e">
+            <span class="sp-icon">🚫</span>
+            <span class="sp-num" id="stat-spam">0</span>
+            <span class="sp-lbl">Spam</span>
+          </div>
+        </div>
+
+        <!-- Category Heading -->
+        <div class="cat-heading" id="catHeading">
+          <div class="cat-title-wrap">
+            <span class="cat-emoji" id="catEmoji">📬</span>
+            <h1 class="cat-title" id="catTitle">All Emails</h1>
+            <span class="cat-count" id="catCount">0 emails</span>
+            <span class="gmail-live-badge hidden" id="gmailBadge">
+              <span class="live-dot"></span> Gmail Connected
+            </span>
+          </div>
+          <div class="cat-actions">
+            <button class="cat-action-btn" onclick="selectAll()">Select All</button>
+            <button class="cat-action-btn" onclick="deleteSelected()">Delete Selected</button>
+          </div>
+        </div>
+
+        <!-- Email Container -->
+        <div class="email-container list-view" id="emailContainer">
+          <!-- Empty State -->
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">
+              <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <h2 class="empty-title">Your Inbox is Empty</h2>
+            <p class="empty-sub">Click <strong>Fetch Emails</strong> to load your Gmail emails, or try a demo preset below.</p>
+            <div class="empty-demo-btns">
+              <button class="demo-btn" onclick="fetchGmailEmails()" id="emptyFetchBtn" style="display:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+                Fetch Gmail Emails
+              </button>
+              <button class="demo-btn secondary" onclick="loadDemoEmails()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Load Demo Emails
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ COMPOSE / SORT MODAL ═══ -->
+  <div class="modal-overlay" id="composeOverlay" onclick="overlayClick(event)">
+    <div class="modal" id="composeModal">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Sort New Email
+        </div>
+        <button class="modal-close" onclick="closeCompose()" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="mFrom">From</label>
+            <input type="text" id="mFrom" class="form-input" placeholder="sender@example.com" />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="mTo">To</label>
+            <input type="text" id="mTo" class="form-input" placeholder="you@example.com" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="mSubject">Subject</label>
+          <input type="text" id="mSubject" class="form-input" placeholder="Email subject line…" />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="mBody">Body</label>
+          <textarea id="mBody" class="form-textarea" placeholder="Paste or type the email body here…"></textarea>
+        </div>
+
+        <!-- Sample Buttons -->
+        <div class="sample-row">
+          <span class="sample-row-label">Quick samples:</span>
+          <button class="sq-chip sq-work" onclick="fillSample('work')">💼 Work</button>
+          <button class="sq-chip sq-personal" onclick="fillSample('personal')">👤 Personal</button>
+          <button class="sq-chip sq-promo" onclick="fillSample('promotions')">🏷️ Promo</button>
+          <button class="sq-chip sq-social" onclick="fillSample('social')">🌐 Social</button>
+          <button class="sq-chip sq-finance" onclick="fillSample('finance')">💳 Finance</button>
+          <button class="sq-chip sq-travel" onclick="fillSample('travel')">✈️ Travel</button>
+          <button class="sq-chip sq-news" onclick="fillSample('newsletter')">📰 Newsletter</button>
+          <button class="sq-chip sq-spam" onclick="fillSample('spam')">🚫 Spam</button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-cancel-btn" onclick="closeCompose()">Cancel</button>
+        <button class="modal-sort-btn" id="modalSortBtn" onclick="sortAndAdd()">
+          <span class="msb-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          <span>Sort & Add Email</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EMAIL DETAIL MODAL ═══ -->
+  <div class="modal-overlay" id="detailOverlay" onclick="detailOverlayClick(event)">
+    <div class="modal detail-modal" id="detailModal">
+      <div class="modal-header">
+        <div class="modal-title" id="detailSubject">Email Detail</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span class="detail-cat-tag" id="detailCatTag"></span>
+          <button class="modal-close" onclick="closeDetail()" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="detail-meta" id="detailMeta"></div>
+      <div class="detail-signals" id="detailSignals"></div>
+      <div class="detail-body" id="detailBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!-- Google API Client -->
+  <script src="https://apis.google.com/js/api.js" async defer></script>
+  
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+/*//////////////////////////// This is for four /////////////////////////////////*/
+.four {
+  background: linear-gradient(#adbcd0, #e4daca);
+  /* background-color: #e2cab4; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding-top: 13%;
+  padding-bottom: 13%;
+}
+
+#four-center {
+  /* background-color: #f1efd6;  */
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 20px;
+  position: relative;
+  padding-top: 2%;
+}
+
+#four-int1 {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  margin: 0;
+  font-family: "Milonga", serif;
+}
+
+#four-int2 {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7%;
+  font-size: 17px;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 3%;
+  font-family: "Andika", sans-serif;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+
+
+@media (max-width: 767px) {
+
+  .four {
+  background: linear-gradient(#adbcd0, #e4daca);
+  /* background-color: #e2cab4; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 130vh;
+  padding-top: 0;
+}
+
+  #four-center {
+    width: 90%;
+    height: 65%;
+  }
+
+  #four-int1 {
+    font-size: 30px;
+  }
+
+  #four-int2 {
+    font-size: 18px;
+    height: 82%;
+    padding: 3%;
+    padding-left: 5%;
+    padding-top: 1%;
+    overflow: hidden;
+  }
+
+
+
+}
+  

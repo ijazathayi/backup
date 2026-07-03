@@ -1,0 +1,29 @@
+on front end just install :
+	axios
+
+
+
+
+on backend at first 
+	npm init -y
+then install:
+	express
+	mongoose  -- connect mongoose
+	cors  -- to connect the frontend and backend
+	nodemon -- to refresh our serverside automatically
+
+after install nodemon come to package.json and on the scripts side add "start" : nodemon `your server file`
+then npm start
+
+
+default thing in server.js
+`
+const express = require ('express')
+const mongoose = require ('mongoose')
+const cors = require ('cors')
+
+
+const app = express()
+app.use(cors())
+app.use(express.json())
+`
